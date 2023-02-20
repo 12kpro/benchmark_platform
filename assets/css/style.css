@@ -1,0 +1,147 @@
+#welcome, #benchmark, #results, #feedback  {
+    display: none;
+}
+
+.container {
+    background-image: url(/assets/images/bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    
+}
+
+header{
+    width: 250px;
+    height: 90px;
+    margin-bottom: 45px;
+    margin-left: 10%;
+}
+
+img {
+    width: 60%;
+    margin: 30px auto;
+    
+} 
+
+section {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vh;
+    height: 100vh;
+    margin-left: 10%;
+    color: white;
+    font-family: 'Inter';
+    margin-right: 10%;
+    padding-top: 10%;
+}
+
+.welcontent{
+    margin-right: auto;
+    margin-bottom: 20vh;
+}
+
+h1 {
+    font-family: 'Outfit';
+    font-size: 60px;
+    margin-bottom: 40px;
+}
+
+h1 strong {
+    display: block;
+    font-family: 'Outfit';
+    font-size: 60px;
+    font-weight: bold;
+}
+
+h3 {
+    font-family: 'Outfit';
+    color: #D20094;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+p {
+    margin-bottom: 20px;
+
+}
+
+ul {
+    margin-left: 10px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+li {
+    
+    line-height: 1.5;
+}
+
+ul li strong {
+    font-weight: bold;
+
+}
+/*
+::before::marker {
+    margin-right: 20px;
+}
+*/
+form {
+    width: 100%;
+    margin: auto;
+
+    font-weight: bold;
+
+}
+
+input[type="checkbox"]{
+
+    
+    cursor: pointer;
+    margin: 0 auto;
+    width: 20px;
+    height: 20px;
+    border: 2px solid white; 
+}
+
+form label {
+
+    align-items: left;
+    cursor: pointer;
+    padding-left: 15px;
+}
+
+form button {
+
+    text-transform: uppercase;
+    margin-left: 22vh;
+    padding: 20px 55px;
+    background: transparent;
+    font-size: 1rem;
+    border: 1px solid rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-style: bold;
+    box-shadow: 0 0 5px #00FFFF, 0 0 20px #00FFFF;
+}
+
+form button:hover {
+    transition: 1s;
+    background: #00FFFF;
+    box-shadow: 0 0 5px #00FFFF,
+    0 0 25px #00FFFF, 0 0 50px #00FFFF;
+}
+
+/* CREARE BUTTON::after al click appare checkbox con tick di fontawesome*/
+
+/* ----------------       FINE SECTION 1     ---------------------- */
+
+#benchmark {
+    display: block;
+}
+
+input[type="radio"]{
+    display: none;
+} 
