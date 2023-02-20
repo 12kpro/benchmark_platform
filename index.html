@@ -4,9 +4,126 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Outfit&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/script.js"></script>
     <title>Benchmark platform</title>
 </head>
 <body>
-    
+    <div class="container">
+        <header>
+            <img src="assets/images/epicode_logo.png" alt="">
+        </header>
+        <main>
+            <section id="welcome">
+                <h1>Welcome to <strong>your exam</strong></h1>
+                <div>
+                    <h3>Instruction</h3>
+                    <p>
+                        We don't expect most engineers to know the answers to all of these
+                        questions, so don't worry if you're unsure of a few of them.
+                    </p>
+                    <ul>
+                        <li>Each question is timed and can only be answered once.</li>
+                        <li>Changing browser tab or opening other windows will invalidate the question.</li>
+                        <li>This exam will take approx. 0-5 minutes.</li>
+                    </ul>
+                </div>
+                <form>
+                    <input type="checkbox" id="terms">
+                    <label for="terms">I promise to answer myself without help from anyone</label>
+                    <button>proceed</button>
+                </form>
+
+            </section>
+            
+            <section id="benchmark">
+                <div class="timer">
+                </div>
+                <form >
+                    <fieldset>
+                        <legend><h2>Risposta multipla</h2> <p>bla</p>  </legend>
+                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                        <label for="vehicle1"> I have a bike</label><br>
+                        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                        <label for="vehicle2"> I have a car</label><br>
+                        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                        <label for="vehicle3"> I have a boat</label><br>
+                        <input type="checkbox" id="vehicle4" name="vehicle4" value="Supercar">
+                        <label for="vehicle4"> I have a boat</label><br>
+                      </fieldset>
+                      <fieldset>
+                        <legend><h2>Risposta singola</h2> <p>bla</p> </legend>
+                        <input type="radio" id="radio1" name="vehicle1" value="Bike">
+                        <label for="radio1"> I have a bike</label><br>
+                        <input type="radio" id="radio2" name="vehicle2" value="Car">
+                        <label for="radio2"> I have a car</label><br>
+                        <input type="radio" id="radio3" name="vehicle3" value="Boat">
+                        <label for="radio3"> I have a boat</label><br>
+                        <input type="radio" id="radio4" name="vehicle3" value="Boat">
+                        <label for="radio4"> I have a boat</label><br>
+                      </fieldset>
+                    <button>Domanda sucessiva</button>
+                </form>
+                <footer>question 1 <span>/10</span></footer>
+            </section>
+
+            <section id="results">
+                <h2>Results</h2>
+                <p>The summary of your answers:</p>
+                <div>
+                    <div>
+                        <h4>Correct</h4>
+                        <p>66%</p>
+                        <p>4/6 questions</p>
+                    </div>
+                    <div>
+                        <h5>Congratulation!</h5>
+                        <h6>You passed the exam.</h6>
+                        <p>
+                            We'll send you the certificate
+                            in few minutes.
+                            Check your email (including
+                            promotions / spam folder)
+                        </p>
+                        <button>RATE US</button>
+                    </div>
+                    <div>
+                        <h4>Wrong</h4>
+                        <p>33%</p>
+                        <p>2/6 questions</p>
+                    </div>
+                </div>
+
+            </section>
+
+            <section id="feedback">
+                <h2>Tell us how it's going</h2>
+                <p>
+                    From O to 10, how likely are you to recommend EPICODE
+                    to a friend or a colleague?
+                </p>
+                <div>
+                    <span class="star">1</span>
+                    <span class="star">2</span>
+                    <span class="star">3</span>
+                    <span class="star">4</span>
+                    <span class="star">5</span>
+                    <span class="star">6</span>
+                    <span class="star">7</span>
+                    <span class="star">8</span>
+                    <span class="star">9</span>
+                    <span class="star">10</span>
+                </div>
+                <p>Leave us an open feedback about your experience so far</p>
+                <input type="text" placeholder="Write your comment here">
+                <button>MORE INFO</button>
+
+            </section>
+        </main>
+    </div>
 </body>
 </html>
