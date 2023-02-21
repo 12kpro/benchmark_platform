@@ -124,7 +124,11 @@ const questions = [
         incorrect_answers: ["Python", "C", "Jakarta"],
       }    
   ];
-
+let results = {
+  correct: 0,
+  wrong: 0,
+  total: questions.length
+}
 let questionsCount = 0
 let timer
 let total = document.querySelector('#benchmark #total')
@@ -161,7 +165,7 @@ function createFom(questionId) {
 
                     input.addEventListener('click',(e) => {
                         questionsCount = questionsCount + 1
-                        question.answers = e.target.value
+                        question.answer = e.target.value
                         console.log(questions);
                         clearInterval(timer)
                         slideQuestion()
@@ -177,7 +181,10 @@ function slideQuestion(){
     let countDown = document.querySelector("#timer")
         countDown.textContent = second
         
-    timer = setInterval(() => {
+   
+
+    if ( questionsCount < questions.length  ) {
+        timer = setInterval(() => {
           second--
           countDown.textContent = second
           if ( second == 0 ){
@@ -188,20 +195,22 @@ function slideQuestion(){
           console.log("Delayed for 1 second.");
         }, 1000)
 
-
-    if ( questionsCount < questions.length  ) {
         current.textContent = questionsCount + 1
         benchmark.innerHTML = ''
         benchmark.append(createFom(questionsCount))
     }else{
         console.log('Domande finite');
+        stat()
         //rimuovere event dalle input
         // passare a slide successive
     }
 
 }
-function validate(){
-
+function stat(){
+  for (const question of questions) {
+      question.correct_answer == question.answer ? results.correct += 1  : results.wrong += 1
+  }
+  console.log(results);
 }
 
 })
