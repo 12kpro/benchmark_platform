@@ -210,11 +210,11 @@ function stat(){
   for (const question of questions) {
       question.correct_answer == question.answer ? results.correct += 1  : results.wrong += 1
   } 
-     let correctScore = document.querySelector('#correct p:first-child')
-         //correctScore.textContent = (results.total/100) * results.correct + "%"
-        console.log(correctScore);
+     let correctScore = document.querySelector('#correct p')
+         correctScore.textContent = (results.total/100) * results.correct + "%"
      let correctCount = document.querySelectorAll('#correct p:last-child span')
-          console.log(correctCount);
+         correctCount[0].textContent = results.correct
+         correctCount[1].textContent = results.total
 
      let wrongEl = document.querySelectorAll('#wrong p')
      
