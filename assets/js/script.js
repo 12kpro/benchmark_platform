@@ -127,7 +127,6 @@ const questions = [
 
 let questionsCount = 0
 
-
 let total = document.querySelector('#benchmark #total')
     total.textContent = questions.length
 
@@ -171,8 +170,22 @@ function createFom(questionId) {
         return fielSet
 }
 function slideQuestion(){
+    let second = 60
     let benchmark = document.querySelector('#benchmark form')
     let current = document.querySelector('#benchmark #current')
+    let countDown = document.querySelector("#timer")
+        countDown.textContent(second)
+        
+    let timer = setInterval(() => {
+          second--
+          countDown.textContent(second)
+          if ( second == 0 ){
+            clearInterval(timer)
+            slideQuestion()
+          }
+          console.log("Delayed for 1 second.");
+        }, 1000)
+
 
     if ( questionsCount < questions.length  ) {
         current.textContent = questionsCount + 1
@@ -188,8 +201,6 @@ function slideQuestion(){
 function validate(){
 
 }
-
-
 
 })
 
