@@ -28,8 +28,8 @@ section {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vh;
-    height: 100vh;
+    width: 1100px;
+    height: 800px;
     margin-left: 10%;
     color: white;
     font-family: 'Inter';
@@ -63,7 +63,7 @@ h3 {
     margin-bottom: 15px;
 }
 
-p {
+.psec1 {
     margin-bottom: 20px;
 
 }
@@ -133,7 +133,7 @@ form button:hover {
 /* ----------------       FINE SECTION 1     ---------------------- */
 
 #benchmark {
-    display: block;
+    display: none;
     padding-top: 3%;
 }
 
@@ -240,8 +240,128 @@ footer {
     letter-spacing: 4px;
 }
 
-
-
 .slash{
     color: #D20094;
+}
+
+/* ------------------FINE SEZIONE 2---------------------------------*/
+
+#results {
+    display: block;
+    padding-top: 5%;
+}
+
+h2 {
+    font-family: 'Outfit';
+    text-align: center;
+    font-size: 60px;
+    margin-bottom: 1%;
+}
+
+.pofh2 {
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: 'Outfit';
+    margin-bottom: 3%;
+}
+
+.percentuali{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.percentuali > div{
+    display: inline-block;
+}
+
+.centro{
+    position: relative;
+    width: 350px;
+    height: 350px;
+}
+
+svg {
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+/* DIMENSION CLASS */
+
+.svg-indicator1 {
+    width: 350px;
+    height: 350px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+.svg-indicator-track1, .svg-indicator-indication1 {
+    cx: 50px;
+    cy: 50px;
+    r: 40px;
+    fill: transparent;
+    stroke-width: 10px;
+  }
+  
+.svg-indicator-track1 {
+    stroke: #ddd;
+  }
+  
+.svg-indicator-indication1 {
+    stroke: #00FFFF;
+    width: 350px;
+    height: 350px;
+  }
+
+.testocentro {
+    margin-top: 20%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+h5 {
+    text-align: center;
+    font-weight: bold;
+}
+
+h6 {
+    text-align: center;
+    color: #00FFFF;
+    font-weight: bold;
+    padding-bottom: 5%;
+}
+
+.centro > p {
+    text-align: center;
+    
+}
+
+.destra  {
+    width: 350px;
+    height: 350px;
+    text-align: right;
+}
+
+.sinistra {
+    width: 350px;
+    height: 350px;
+    text-align: left;
+}
+
+h4 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: center;
+}
+
+.sinistra > p {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    align-content: center;
+
 }
