@@ -216,7 +216,12 @@ function stat(){
          correctCount[0].textContent = results.correct
          correctCount[1].textContent = results.total
 
-     let wrongEl = document.querySelectorAll('#wrong p')
+     let wrongScore = document.querySelector('#wrong p')
+         wrongScore.textContent =(results.total/100) * results.wrong + "%"
+     let wrongCount = document.querySelectorAll('#wrong p:last-child span') 
+         wrongCount[0].textContent = results.wrong
+         wrongCount[1].textContent = results.total
+         
      
 //        correctEl.firstElementChild.textContent = (results.total/100) * results.correct + "%"
 //        wrongEl.firstElementChild.textContent = (results.total/100) * results.wrong + "%"
