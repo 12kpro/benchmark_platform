@@ -209,7 +209,27 @@ function slideQuestion(){
 function stat(){
   for (const question of questions) {
       question.correct_answer == question.answer ? results.correct += 1  : results.wrong += 1
-  }
+  } 
+     let correctScore = document.querySelector('#correct p')
+         correctScore.textContent = (results.total/100) * results.correct + "%"
+     let correctCount = document.querySelectorAll('#correct p:last-child span')
+         correctCount[0].textContent = results.correct
+         correctCount[1].textContent = results.total
+
+     let wrongScore = document.querySelector('#wrong p')
+         wrongScore.textContent =(results.total/100) * results.wrong + "%"
+     let wrongCount = document.querySelectorAll('#wrong p:last-child span') 
+         wrongCount[0].textContent = results.wrong
+         wrongCount[1].textContent = results.total
+         
+     
+//        correctEl.firstElementChild.textContent = (results.total/100) * results.correct + "%"
+//        wrongEl.firstElementChild.textContent = (results.total/100) * results.wrong + "%"
+     /*
+     <h4>Correct</h4>+
+     <p>66%</p>
+     <p><span>4</span>/<span>6</span> questions</p>
+*/
   console.log(results);
 }
 
