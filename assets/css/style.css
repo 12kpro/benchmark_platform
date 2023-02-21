@@ -462,10 +462,28 @@ h6 {
     padding-bottom: 5%;
 }
 
+#feedback > h2{
+    margin-bottom: 5%;
+}
+
 input[type="text"]{
-    
     display: block;
     appearance: none;
+    background-color: transparent;
+    border: none;
+    padding-bottom: 10px;
+    color: #ddd;
+    width: 100%;
+}
+
+.commento{
+    border-bottom: 1px solid #D20094;
+    margin-bottom: 5%;
+    padding: 0 20px;
+}
+
+input:focus-visible{
+    outline: none;
 }
 
 #feedback button {
