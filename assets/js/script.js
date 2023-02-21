@@ -126,7 +126,7 @@ const questions = [
   ];
 
 let questionsCount = 0
-
+let timer
 let total = document.querySelector('#benchmark #total')
     total.textContent = questions.length
 
@@ -163,6 +163,7 @@ function createFom(questionId) {
                         questionsCount = questionsCount + 1
                         question.answers = e.target.value
                         console.log(questions);
+                        clearInterval(timer)
                         slideQuestion()
                     })
                     
@@ -174,12 +175,13 @@ function slideQuestion(){
     let benchmark = document.querySelector('#benchmark form')
     let current = document.querySelector('#benchmark #current')
     let countDown = document.querySelector("#timer")
-        countDown.textContent(second)
+        countDown.textContent = second
         
-    let timer = setInterval(() => {
+    timer = setInterval(() => {
           second--
-          countDown.textContent(second)
+          countDown.textContent = second
           if ( second == 0 ){
+            questionsCount = questionsCount + 1
             clearInterval(timer)
             slideQuestion()
           }
