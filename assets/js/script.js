@@ -124,7 +124,9 @@ const questions = [
         incorrect_answers: ["Python", "C", "Jakarta"],
       }    
   ];
-const answers = []
+
+let questionsCount = 0
+
 
 let total = document.querySelector('#benchmark #total')
     total.textContent = questions.length
@@ -133,17 +135,18 @@ let total = document.querySelector('#benchmark #total')
 slideQuestion()
 
 
-function createFom(question) {
+function createFom(questionId) {
+    let question = questions[questionId]
     let fielSet = document.createElement('fieldset')
     let legend  = document.createElement('legend')
         legend.innerHTML = question.question
-
+    let answers = Array.from(question.incorrect_answers)
+        answers.push(question.correct_answer)
         fielSet.append(legend)
 
-        question.incorrect_answers.push(question.correct_answer)
-
-        for (let [i, a] of question.incorrect_answers.entries()) {
+        for (let [i, a] of answers.entries()) {
                 let radio =  document.createElement('div')
+                    radio.classList.add('answer')
 
                 let input =  document.createElement('input')
                     input.setAttribute('id', 'radio_' + i)
@@ -158,8 +161,9 @@ function createFom(question) {
                     fielSet.append(radio)
 
                     input.addEventListener('click',(e) => {
-                        answers.push(e.target.value)
-                        console.log(answers);
+                        questionsCount = questionsCount + 1
+                        question.answers = e.target.value
+                        console.log(questions);
                         slideQuestion()
                     })
                     
@@ -169,12 +173,11 @@ function createFom(question) {
 function slideQuestion(){
     let benchmark = document.querySelector('#benchmark form')
     let current = document.querySelector('#benchmark #current')
-    let question = questions[answers.length]
 
-    if ( question ) {
-        current.textContent = answers.length + 1
+    if ( questionsCount < questions.length  ) {
+        current.textContent = questionsCount + 1
         benchmark.innerHTML = ''
-        benchmark.append(createFom(question))
+        benchmark.append(createFom(questionsCount))
     }else{
         console.log('Domande finite');
         //rimuovere event dalle input
@@ -186,9 +189,6 @@ function validate(){
 
 }
 
-
-
-console.log(answers.length);
 
 
 })
