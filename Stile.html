@@ -42,13 +42,17 @@
             </section>
             
             <section id="benchmark">
-                <div class="timer">timer
+                <div id="timer">
+                    <svg class="svg-indicator" >
+                        <circle class="svg-indicator-track" />
+                        <circle class="svg-indicator-indication" />
+                    </svg>
                 </div>
                 <form >
                       <fieldset>
 
                         <legend>DOMANDA</legend>
-                        <!-- AGGIORNARE I DIV NEL JS -->
+                        <!-- AGGIORNARE I DIV NEL JS / CLASSE BUGGATA  -->
                         <div class="answer">
                         <input type="radio" id="radio1" name="vehicle1" value="Bike">
                         <label for="radio1"> I have a bike</label><br>
@@ -65,14 +69,14 @@
                         </div>
 
                         <div class="answer">
-                        <input type="radio" id="radio4" name="vehicle3" value="Boat">
+                        <input type="radio" id="radio4" name="vehicle4" value="Boat">
                         <label for="radio4"> I have a boat</label><br>
                         </div>
 
                       </fieldset>
                 </form>
 
-                <footer>question <span id="current">1</span>/<span id="total">10</span></footer>
+                <footer>question &nbsp;<span id="current">1</span><span class="slash">/</span><span id="total" class="slash"> 10</span></footer>
 
             </section>
 
