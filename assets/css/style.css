@@ -249,6 +249,7 @@ footer {
 #results {
     display: block;
     padding-top: 5%;
+    text-align: center;
 }
 
 h2 {
@@ -298,25 +299,25 @@ svg {
   }
   
 .svg-indicator-track1, .svg-indicator-indication1 {
-    cx: 50px;
-    cy: 50px;
-    r: 40px;
+    cx: 175px;
+    cy: 175px;
+    r: 145px;
     fill: transparent;
-    stroke-width: 10px;
+    stroke-width: 30px;
   }
   
 .svg-indicator-track1 {
-    stroke: #ddd;
+    stroke: #00FFFF;
   }
   
 .svg-indicator-indication1 {
-    stroke: #00FFFF;
+    stroke: #D20094;
     width: 350px;
     height: 350px;
   }
 
 .testocentro {
-    margin-top: 20%;
+    margin-top: 30%;
     margin-left: 20%;
     margin-right: 20%;
 }
@@ -341,15 +342,37 @@ h6 {
 .destra  {
     width: 350px;
     height: 350px;
-    text-align: right;
+    text-align: end;
 }
 
 .sinistra {
     width: 350px;
     height: 350px;
-    text-align: left;
+    text-align: start;
 }
 
+
+.destra > h4, .sinistra > h4{
+    font-family: 'Outfit';
+    font-size: 60px;
+
+
+
+}
+
+.destra > p:nth-first-child(), .sinistra > p:nth-first-child(){
+    font-family: 'Outfit';
+    font-size: 60px;
+    
+
+}
+
+
+
+
+
+
+/*
 h4 {
     display: flex;
     justify-content: flex-start;
@@ -364,4 +387,34 @@ h4 {
     flex-wrap: wrap;
     align-content: center;
 
+}
+
+.destra > p{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    align-content: center;
+}
+*/
+button {
+
+    margin-top: 5%;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 20px 55px;
+    background: transparent;
+    font-size: 1rem;
+    border: 1px solid rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-style: bold;
+    box-shadow: 0 0 5px #00FFFF, 0 0 20px #00FFFF;
+}
+
+button:hover{
+    transition: 1s;
+    background: #00FFFF;
+    box-shadow: 0 0 5px #00FFFF,
+    0 0 25px #00FFFF, 0 0 50px #00FFFF;
 }
