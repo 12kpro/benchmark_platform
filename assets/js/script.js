@@ -174,7 +174,7 @@ function slideQuestion(){
     let benchmark = document.querySelector('#benchmark form')
     let current = document.querySelector('#benchmark #current')
     let countDown = document.querySelector("#timer")
-        countDown.textContent(second)
+        countDown.textContent = second
         
     let timer = setInterval(() => {
           second--
