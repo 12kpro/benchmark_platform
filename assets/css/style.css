@@ -115,7 +115,7 @@ form button {
     background: transparent;
     font-size: 1rem;
     border: 1px solid rgb(0, 0, 0);
-    color: rgb(0, 0, 0);
+    color: rgb(32, 2, 38);
     font-weight: bold;
     font-style: bold;
     box-shadow: 0 0 5px #00FFFF, 0 0 20px #00FFFF;
@@ -288,15 +288,13 @@ svg {
     vertical-align: middle;
 }
 
-/* DIMENSION CLASS */
-
 .svg-indicator1 {
     width: 350px;
     height: 350px;
     position: absolute;
     top: 0;
     left: 0;
-  }
+}
   
 .svg-indicator-track1, .svg-indicator-indication1 {
     cx: 175px;
@@ -304,17 +302,17 @@ svg {
     r: 145px;
     fill: transparent;
     stroke-width: 30px;
-  }
+}
   
 .svg-indicator-track1 {
     stroke: #00FFFF;
-  }
+}
   
 .svg-indicator-indication1 {
     stroke: #D20094;
     width: 350px;
     height: 350px;
-  }
+}
 
 .testocentro {
     margin-top: 30%;
@@ -391,7 +389,7 @@ h6 {
     font-size: 1.3rem;
 }
 
-button {
+#results button {
 
     margin-top: 5%;
     text-align: center;
@@ -406,7 +404,7 @@ button {
     box-shadow: 0 0 5px #00FFFF, 0 0 15px #00FFFF;
 }
 
-button:hover{
+#results button:hover{
     transition: 1s;
     background: #00FFFF;
     box-shadow: 0 0 5px #00FFFF,
@@ -419,12 +417,74 @@ button:hover{
 #feedback{
     display: block;
     text-align: center;
-    padding-left: 3%;
-    padding-right: 3%;
+    padding-left: 7%;
+    padding-right: 7%;
 }
 
 #feedback p:nth-child(2){
     font-family: 'Outfit';
-    font-size: 2.5rem;
+    font-size: 2rem;
     padding-bottom: 5%;
+}
+
+.stelle{
+    margin-bottom: 8%;
+    letter-spacing: 1rem;
+}
+
+/*
+.stelle > label{
+    cursor: pointer;
+    
+    
+}
+
+.stelle > label:hover svg{
+    fill: #D20094;
+}
+
+.stelle input[type="radio"]{
+    display: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    appearance: none;
+    
+}
+
+*/
+
+
+/*----------------------------*/
+#feedback p:nth-child(4){
+    font-family: 'Outfit';
+    font-size: 1.8rem;
+    padding-bottom: 5%;
+}
+
+input[type="text"]{
+    
+    display: block;
+    appearance: none;
+}
+
+#feedback button {
+    font-family: 'Outfit';
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    padding: 20px 55px;
+    background: transparent;
+    
+    border: 3px solid transparent;
+    color: rgb(32, 2, 38);
+    font-weight: bold;
+    font-style: bold;
+    box-shadow: 0 0 5px #00FFFF, 0 0 20px #00FFFF;
+}
+
+#feedback button:hover {
+    transition: 1s;
+    background: #00FFFF;
+    box-shadow: 0 0 5px #00FFFF,
+    0 0 25px #00FFFF, 0 0 50px #00FFFF;
 }
