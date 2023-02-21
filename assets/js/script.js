@@ -124,8 +124,13 @@ const questions = [
         incorrect_answers: ["Python", "C", "Jakarta"],
       }    
   ];
-const answers = []
-
+let results = {
+  correct: 0,
+  wrong: 0,
+  total: questions.length
+}
+let questionsCount = 0
+let timer
 let total = document.querySelector('#benchmark #total')
     total.textContent = questions.length
 
@@ -133,17 +138,18 @@ let total = document.querySelector('#benchmark #total')
 slideQuestion()
 
 
-function createFom(question) {
+function createFom(questionId) {
+    let question = questions[questionId]
     let fielSet = document.createElement('fieldset')
     let legend  = document.createElement('legend')
         legend.innerHTML = question.question
-
+    let answers = Array.from(question.incorrect_answers)
+        answers.push(question.correct_answer)
         fielSet.append(legend)
 
-        question.incorrect_answers.push(question.correct_answer)
-
-        for (let [i, a] of question.incorrect_answers.entries()) {
+        for (let [i, a] of answers.entries()) {
                 let radio =  document.createElement('div')
+                    radio.classList.add('answer')
 
                 let input =  document.createElement('input')
                     input.setAttribute('id', 'radio_' + i)
@@ -158,8 +164,10 @@ function createFom(question) {
                     fielSet.append(radio)
 
                     input.addEventListener('click',(e) => {
-                        answers.push(e.target.value)
-                        console.log(answers);
+                        questionsCount = questionsCount + 1
+                        question.answer = e.target.value
+                        console.log(questions);
+                        clearInterval(timer)
                         slideQuestion()
                     })
                     
@@ -167,29 +175,63 @@ function createFom(question) {
         return fielSet
 }
 function slideQuestion(){
+    let second = 60
     let benchmark = document.querySelector('#benchmark form')
     let current = document.querySelector('#benchmark #current')
-    let question = questions[answers.length]
+    let countDown = document.querySelector("#timer")
+        countDown.textContent = second
+        
+   
 
-    if ( question ) {
-        current.textContent = answers.length + 1
+    if ( questionsCount < questions.length  ) {
+        timer = setInterval(() => {
+          second--
+          countDown.textContent = second
+          if ( second == 0 ){
+            questionsCount = questionsCount + 1
+            clearInterval(timer)
+            slideQuestion()
+          }
+          console.log("Delayed for 1 second.");
+        }, 1000)
+
+        current.textContent = questionsCount + 1
         benchmark.innerHTML = ''
-        benchmark.append(createFom(question))
+        benchmark.append(createFom(questionsCount))
     }else{
         console.log('Domande finite');
+        stat()
         //rimuovere event dalle input
         // passare a slide successive
     }
 
 }
-function validate(){
+function stat(){
+  for (const question of questions) {
+      question.correct_answer == question.answer ? results.correct += 1  : results.wrong += 1
+  } 
+     let correctScore = document.querySelector('#correct p')
+         correctScore.textContent = (results.total/100) * results.correct + "%"
+     let correctCount = document.querySelectorAll('#correct p:last-child span')
+         correctCount[0].textContent = results.correct
+         correctCount[1].textContent = results.total
 
+     let wrongScore = document.querySelector('#wrong p')
+         wrongScore.textContent =(results.total/100) * results.wrong + "%"
+     let wrongCount = document.querySelectorAll('#wrong p:last-child span') 
+         wrongCount[0].textContent = results.wrong
+         wrongCount[1].textContent = results.total
+         
+     
+//        correctEl.firstElementChild.textContent = (results.total/100) * results.correct + "%"
+//        wrongEl.firstElementChild.textContent = (results.total/100) * results.wrong + "%"
+     /*
+     <h4>Correct</h4>+
+     <p>66%</p>
+     <p><span>4</span>/<span>6</span> questions</p>
+*/
+  console.log(results);
 }
-
-
-
-console.log(answers.length);
-
 
 })
 
