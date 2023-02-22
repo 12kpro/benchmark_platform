@@ -125,8 +125,8 @@ const questions = [
       }    
   ];
 let results = {
-  correct: 0,
-  wrong: 0,
+  correct: 10,
+  wrong: 1,
   total: questions.length
 }
 let questionsCount = 0
@@ -135,8 +135,8 @@ let total = document.querySelector('#benchmark #total')
     total.textContent = questions.length
 
 
-slideQuestion()
-
+//slideQuestion()
+stat()
 
 function createFom(questionId) {
     let question = questions[questionId]
@@ -154,6 +154,7 @@ function createFom(questionId) {
                 let input =  document.createElement('input')
                     input.setAttribute('id', 'radio_' + i)
                     input.setAttribute('type','radio')
+                    input.setAttribute('name','answer')
                     input.value = a
 
                 let label =  document.createElement('label')
@@ -163,11 +164,12 @@ function createFom(questionId) {
                     radio.append(input, label)
                     fielSet.append(radio)
 
-                    input.addEventListener('click',(e) => {
+                    radio.addEventListener('click',(e) => {
                         questionsCount = questionsCount + 1
                         question.answer = e.target.value
                         console.log(questions);
                         clearInterval(timer)
+                        //setTimeout(continueExecution, 10000)
                         slideQuestion()
                     })
                     
@@ -178,7 +180,7 @@ function slideQuestion(){
     let second = 60
     let benchmark = document.querySelector('#benchmark form')
     let current = document.querySelector('#benchmark #current')
-    let countDown = document.querySelector("#timer")
+    let countDown = document.querySelector("#countdown")
         countDown.textContent = second
         
    
@@ -187,6 +189,7 @@ function slideQuestion(){
         timer = setInterval(() => {
           second--
           countDown.textContent = second
+          updateSvgIndicator('#timer .svg-indicator-indication', 40, 60, second)
           if ( second == 0 ){
             questionsCount = questionsCount + 1
             clearInterval(timer)
@@ -208,16 +211,17 @@ function slideQuestion(){
 }
 function stat(){
   for (const question of questions) {
-      question.correct_answer == question.answer ? results.correct += 1  : results.wrong += 1
-  } 
+ //     question.correct_answer == question.answer ? results.correct += 1  : results.wrong += 1
+  }
+  updateSvgIndicator('.svg-indicator-indication1', 145, results.total, results.wrong) 
      let correctScore = document.querySelector('#correct p')
-         correctScore.textContent = (results.total/100) * results.correct + "%"
+         correctScore.textContent =  Number((100/results.total) * results.correct).toFixed(2)  + "%"
      let correctCount = document.querySelectorAll('#correct p:last-child span')
          correctCount[0].textContent = results.correct
          correctCount[1].textContent = results.total
 
      let wrongScore = document.querySelector('#wrong p')
-         wrongScore.textContent =(results.total/100) * results.wrong + "%"
+         wrongScore.textContent = Number((100/results.total) * results.wrong).toFixed(2) + "%"
      let wrongCount = document.querySelectorAll('#wrong p:last-child span') 
          wrongCount[0].textContent = results.wrong
          wrongCount[1].textContent = results.total
@@ -232,7 +236,29 @@ function stat(){
 */
   console.log(results);
 }
+function updateSvgIndicator (el, r, start, current){
+  let indicator = document.querySelector(el)
+  let progress = (100/start)*current
+  let arcOffset = ( 2*3.14*r ) * ((100 - progress)/100)
+      indicator.style.strokeDashoffset = arcOffset
+  console.log(arcOffset);
+  //console.log(indicator.style.strokeDashoffset);
+  /*
+  size = 100
+  strokeWidth = 10
+  center = size / 2
+         = 100 / 2 = 50
+  radius = center - strokeWidth 
+         = 50 - 10 = 40
+  progress = 0
+  arcLength = 2 * π * radius 
+            = 2 * 3.14 * 40 = 251.2
+  arcOffset = arcLength * ((100 - progress)/100) 
+            = 251.2 * ((100 - 0)/100) = 251.2
+*/
 
+
+}
 })
 
 
