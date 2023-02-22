@@ -30,11 +30,12 @@ section {
     left: 0;
     width: 1100px;
     height: 800px;
-    margin-left: 10%;
+/*    margin-left: 10%;*/
     color: white;
     font-family: 'Inter';
-    margin-right: 10%;
+/*    margin-right: 10%;*/
     padding-top: 10%;
+    margin: 0 auto;
 }
 
 .welcontent{
@@ -142,6 +143,7 @@ input[type="radio"]{
 } 
 
 #timer {
+    position: relative;
     margin: 0 auto;
     display: fixed;
     text-align: end;
@@ -151,11 +153,13 @@ input[type="radio"]{
 svg {
     max-width: 100%;
     vertical-align: middle;
+    transform: rotate(-90deg);
   }
   
   .svg-indicator {
     width: 100px;
     height: 100px;
+    position: absolute;
   }
   
 .svg-indicator-track, .svg-indicator-indication {
@@ -172,18 +176,22 @@ svg {
   
 .svg-indicator-indication {
     stroke: #00FFFF;
+    stroke-dasharray: 251.2px;
+    stroke-dashoffset: 188.4px;
   }
 
 fieldset {
     width: 100vh;
     height: 70vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-evenly;
     align-items: flex-start;
     flex-wrap: wrap;
     align-content: center;
-    gap: calc(100% / 4 - 0.5rem)
+    gap: 30px;
+    margin: 0 auto;
+/*    gap: calc(100% / 4 - 0.5rem) */
 }
 
 legend {
@@ -192,25 +200,29 @@ legend {
     margin: 0 auto;
     width: 100%;
     text-align: center;
-    display: flex;
+/*    display: flex;
     align-items: center;
     justify-content: center;
+*/
     margin-bottom: 7%;
     padding-top: 5%;
     
     
 }
 
-form fieldset div {
-    width: 300px;
-    height: 100px;
+form fieldset label {
+    width: 350px;
+ /*   height: 80px;*/
     margin: 0 auto;
-    display: flex;
+    display: block;
+    padding: 25px 0px;
+/*    display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: flex-start;
     flex-wrap: wrap;
     align-content: center;
+    */
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -220,7 +232,7 @@ form fieldset div {
     text-align: center;
     
 }
-form fieldset div:hover{
+form fieldset label:hover{
     background: rgb(210,0,148);
     background: linear-gradient(90deg, rgba(210,0,148,1) 35%, rgba(144,0,144,1) 100%);
     backdrop-filter: blur(10px);
@@ -272,11 +284,11 @@ h2 {
     justify-content: space-evenly;
     align-items: flex-start;
 }
-
+/*
 .percentuali > div{
     display: inline-block;
 }
-
+*/
 .centro{
     position: relative;
     width: 350px;
@@ -312,6 +324,8 @@ svg {
     stroke: #D20094;
     width: 350px;
     height: 350px;
+    stroke-dasharray: 910.6px;
+    stroke-dashoffset: 188.4px;
 }
 
 .testocentro {
@@ -424,14 +438,19 @@ h6 {
 #feedback p:nth-child(2){
     font-family: 'Outfit';
     font-size: 2rem;
-    padding-bottom: 5%;
+    margin-bottom: 2%;
 }
 
 .stelle{
     margin-bottom: 8%;
     letter-spacing: 1rem;
 }
-
+.stelle svg{
+    opacity: 0.2;
+}
+.stelle svg:hover{
+    opacity: 1;
+}
 /*
 .stelle > label{
     cursor: pointer;
@@ -459,7 +478,7 @@ h6 {
 #feedback p:nth-child(4){
     font-family: 'Outfit';
     font-size: 1.8rem;
-    padding-bottom: 5%;
+    margin-bottom: 5%;
 }
 
 #feedback > h2{
@@ -468,6 +487,7 @@ h6 {
 
 input[type="text"]{
     display: block;
+    font-size: 1.1rem;
     appearance: none;
     background-color: transparent;
     border: none;
@@ -506,3 +526,54 @@ input:focus-visible{
     box-shadow: 0 0 5px #00FFFF,
     0 0 25px #00FFFF, 0 0 50px #00FFFF;
 }
+
+
+.rating {
+    display: flex;
+    letter-spacing: 1rem;
+    width: 100%;
+    justify-content: center;
+    overflow: hidden;
+    flex-direction: row-reverse;
+    height: 70px;
+    position: relative;
+    margin-bottom: 50px;
+  }
+  
+  .rating-0 {
+    filter: grayscale(100%);
+  }
+  
+  .rating > input {
+    display: none;
+    caret-color: transparent;
+  }
+  
+  .rating > label {
+    cursor: pointer;
+    caret-color: transparent;
+    width: 70px;
+    height: 70px;
+    margin-top: auto;
+    background-image: url('../images/star.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 76%;
+    transition: .3s;
+    opacity: 0.1;
+  }
+  
+  .rating > input:checked ~ label,
+  .rating > input:checked ~ label ~ label {
+    background-image: url('../images/star.svg');
+    opacity: 1;
+    /*background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23fcd93a' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");*/
+  }
+  
+  
+  .rating > input:not(:checked) ~ label:hover,
+  .rating > input:not(:checked) ~ label:hover ~ label {
+    background-image: url('../images/star.svg');
+    opacity: 0.8;
+    /*background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23d8b11e' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");*/
+  }
