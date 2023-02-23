@@ -135,7 +135,8 @@ let main = document.querySelector('#main')
 
 let proceed = document.querySelector('#main button')
     proceed.addEventListener('click', (e) =>{
-            refreshPage('benchmark', renderBenchmark, countDownAnimation)
+            //refreshPage('benchmark', renderBenchmark, countDownAnimation)
+            refreshPage('difficulty', renderdifficulty)
           })
 
     document.querySelector('#main input[type="checkbox"]').addEventListener('click', (e) =>{
@@ -153,7 +154,19 @@ function refreshPage(next, render, animation = false){
         }
         
 }
-
+function renderdifficulty(template) {
+  let amount = template.querySelector('input')
+  amount.addEventListener('change',(e) =>{
+    console.log(amount.checkValidity(), amount.validationMessage, amount.validity)
+    
+  })
+  template.querySelector('button').addEventListener('click', (e) =>{
+    //let amount = document.querySelector('button')
+    
+    //refreshPage('benchmark', renderBenchmark, countDownAnimation)
+  })
+  return template
+}
 function renderFeedback(template){
     let typingTimer
     let rating = template.querySelector('.rating')
