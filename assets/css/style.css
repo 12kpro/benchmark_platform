@@ -438,15 +438,15 @@ svg {
     vertical-align: middle;
 }
 
-#scorePie{
+#scorePie {
     width: 350px;
     height: 350px;
     position: absolute;
     top: 0;
     left: 0;
-}
-  
-#scorePie .svg-indicator-track, #scorePie .svg-indicator-indication {
+}  
+
+#scorePie .svg-indicator-track,#scorePie .svg-indicator-indication {
     cx: 175px;
     cy: 175px;
     r: 145px;
@@ -464,7 +464,7 @@ svg {
     width: 350px;
     height: 350px;
     stroke-dasharray: 910.6px;
-    stroke-dashoffset: 188.4px;
+    stroke-dashoffset: 910.6px;
 }
 
 .testocentro {

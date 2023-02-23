@@ -125,9 +125,8 @@ const questions = [
       }    
   ];
 let results = {
-  correct: 10,
-  wrong: 1,
-  total: questions.length
+  correct: 0,
+  wrong: 0,
 }
 let questionsCount = 0
 let timer
@@ -136,54 +135,162 @@ let main = document.querySelector('#main')
 
 let proceed = document.querySelector('#main button')
     proceed.addEventListener('click', (e) =>{
-            //refreshPage('benchmark', renderBenchmark)
-            refreshPage('results', renderResults)
-            //refreshPage('feedback', renderFeedback)
+            refreshPage('benchmark', renderBenchmark, countDownAnimation)
           })
+
     document.querySelector('#main input[type="checkbox"]').addEventListener('click', (e) =>{
       if(e.target.checked){
           proceed.disabled = false
       }
     })
 
-function refreshPage(next, render, animation){
-    let template = document.querySelector('#' + next).cloneNode(true)
+function refreshPage(next, render, animation = false){
+    let template = document.querySelector('#' + next).content.cloneNode(true)
         main.className = next
         main.innerHTML = ''
-        for (const el of render(template)) {
-            main.append(el)  
-        }
+        main.append(render(template))
+
         if( animation ){
             animation()
         }
+        
 }
 
 function renderFeedback(template){
+    let typingTimer
     let rating = template.querySelector('.rating')
+    let input = template.querySelector('input')
+    let btn = template.querySelector('button')
+
     for (let i = 0; i < 10; i++) {
       let radio = createRadio(i, i + 1, {type: 'radio', name: 'rating'})
           rating.append(radio.input, radio.label)
     }
-    return template.children
+    input.addEventListener('keyup', (e) =>{
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(()=>{
+        btn.disabled = false
+      }, 1000);
+    })
+
+
+    input.addEventListener
+    return template
 }
 function renderResults(template){
-  template.querySelector('button').addEventListener('click', (e) =>{
-           refreshPage('feedback', renderFeedback)
-  })  
+      for (const question of questions) {
+          question.correct_answer == question.answer ? results.correct += 1  : results.wrong += 1
+      }
+      let stats = Object.keys(results)
+      let indicator = template.querySelector('#scorePie .svg-indicator-indication')
+      let msg = template.querySelectorAll('.testocentro')
 
-  return template.children
+      if ((100/questions.length)*results.wrong > 40 ){
+          msg[0].classList.remove('hideMsg')
+          msg[1].classList.add('hideMsg')
+      }else{
+          msg[0].classList.add('hideMsg')
+          msg[1].classList.remove('hideMsg')
+      }
+
+      for (const stat of stats) {
+          let partial = stat == 'correct' ? results.correct : results.wrong
+          let el = template.querySelector(`#${stat} p`)
+              el.textContent =  Number((100/questions.length) * partial).toFixed(2)  + "%"
+          let count = template.querySelectorAll(`#${stat} p:last-child span`)
+              count[0].textContent = partial
+              count[1].textContent = questions.length
+      }
+      updateSvgIndicator(indicator, 145, questions.length, results.wrong)
+      template.querySelector('button').addEventListener('click', (e) =>{
+              refreshPage('feedback', renderFeedback)
+      })  
+
+  return template
 }
 function renderBenchmark (template){
+  
+  
   let second = Math.floor(Math.random()*2) ? 60 : 30
-  let benchmark = template.querySelector('form')
-  let current = template.querySelector('#current')
+  let question = questions[questionsCount]
+  let answers = Array.from(question.incorrect_answers)
+      answers.push(question.correct_answer)  
+
   let countDown = template.querySelector("#countdown")
+      countDown.setAttribute("data-seconds", second);
       countDown.textContent = second
+
+  let current = template.querySelector('#current')
+      current.textContent = questionsCount + 1
+
   let total = template.querySelector('#total')
       total.textContent = questions.length
-      console.log(template.children);
-      return template.children
+
+  let fieldset = template.querySelector('fieldset')
+      fieldset.innerHTML = ''
+
+  let legend  = document.createElement('legend')
+      legend.innerHTML = question.question
+
+      fieldset.append(legend)
+      for (let [i, a] of answers.entries()) {
+        
+        let radio =  createRadio(i,a,{type: 'radio', name: 'answer'})
+            radio.input.addEventListener('click',(e) => {
+                    question.answer = e.target.value
+                    clearInterval(timer)
+                    //setTimeout(continueExecution, 10000)
+                    if ( questionsCount < questions.length - 1 ){
+                          questionsCount = questionsCount + 1                      
+                          refreshPage('benchmark', renderBenchmark, countDownAnimation)
+                    }else{
+                      refreshPage('results', renderResults)
+                    }
+                })
+                fieldset.append(radio.input, radio.label)
+      }
+ 
+      return template
 }
+
+function resultsAnimation() {
+  let time = 3000
+  let indicator = document.querySelector('#scorePie .svg-indicator-indication')
+  timer = setInterval(() => {
+    time = time - 200
+    updateSvgIndicator(indicator, 145, questions.length, results.wrong)
+    if ( time == 0 ){
+      clearInterval(timer)
+    }
+    console.log("Delayed for 1 second.");
+  }, 200)
+}
+
+function countDownAnimation () {
+
+    let timerEl = document.querySelector('#timer .svg-indicator-indication')
+    let countDown = document.querySelector("#countdown")
+    let second = start  = countDown.dataset.seconds
+
+
+    if ( questionsCount < questions.length  ) {
+      timer = setInterval(() => {
+        second--
+        countDown.textContent = second
+        updateSvgIndicator(timerEl, 40, start, second)
+        if ( second == 0 ){
+          questionsCount = questionsCount + 1
+          clearInterval(timer)
+          refreshPage('benchmark', renderBenchmark, countDownAnimation)
+        }
+        console.log("Delayed for 1 second.");
+      }, 1000)
+  }else{
+      console.log('Domande finite');
+      refreshPage('results', renderResults)
+  }
+}
+
 function createRadio (i, v, p){
 
   let input =  document.createElement('input')
@@ -195,126 +302,14 @@ function createRadio (i, v, p){
       label.htmlFor = `${p.name}_${i}`
       label.textContent = v
 
-  /*
-  for (const property in p) {
-    console.log(`${property}: ${p[property]}`);
-  }
-*/
   return { input: input, label: label }
 }
-function createFom(questionId) {
-    let question = questions[questionId]
-    let fielSet = document.createElement('fieldset')
-    let legend  = document.createElement('legend')
-        legend.innerHTML = question.question
-    let answers = Array.from(question.incorrect_answers)
-        answers.push(question.correct_answer)
-        fielSet.append(legend)
 
-        for (let [i, a] of answers.entries()) {
-                let radio =  document.createElement('div')
-                    radio.classList.add('answer')
-
-                let input =  document.createElement('input')
-                    input.setAttribute('id', 'radio_' + i)
-                    input.setAttribute('type','radio')
-                    input.setAttribute('name','answer')
-                    input.value = a
-
-                let label =  document.createElement('label')
-                    label.htmlFor = 'radio_' + i
-                    label.textContent = a
-
-                    radio.append(input, label)
-                    fielSet.append(radio)
-
-                    radio.addEventListener('click',(e) => {
-                        questionsCount = questionsCount + 1
-                        question.answer = e.target.value
-                        console.log(questions);
-                        clearInterval(timer)
-                        //setTimeout(continueExecution, 10000)
-                        slideQuestion()
-                    })
-                    
-        }
-        return fielSet
-}
-function slideQuestion(template){
-  let second = Math.floor(Math.random()*2) ? 60 : 30
-  let benchmark = template.querySelector('form')
-  let current = template.querySelector('#current')
-  let countDown = template.querySelector("#countdown")
-      countDown.textContent = second
-  let total = template.querySelector('#total')
-      total.textContent = questions.length
-      console.log(template.children);
-      return template.children
-/*
-    let second = 60
-    let benchmark = document.querySelector('#benchmark form')
-    let current = document.querySelector('#benchmark #current')
-    let countDown = document.querySelector("#countdown")
-        countDown.textContent = second
-        
-   
-
-    if ( questionsCount < questions.length  ) {
-        timer = setInterval(() => {
-          second--
-          countDown.textContent = second
-          updateSvgIndicator('#timer .svg-indicator-indication', 40, 60, second)
-          if ( second == 0 ){
-            questionsCount = questionsCount + 1
-            clearInterval(timer)
-            slideQuestion()
-          }
-          console.log("Delayed for 1 second.");
-        }, 1000)
-
-        current.textContent = questionsCount + 1
-        benchmark.innerHTML = ''
-        benchmark.append(createFom(questionsCount))
-    }else{
-        console.log('Domande finite');
-        stat()
-        //rimuovere event dalle input
-        // passare a slide successive
-    }
-*/
-}
-function stat(){
-  for (const question of questions) {
- //     question.correct_answer == question.answer ? results.correct += 1  : results.wrong += 1
-  }
-  updateSvgIndicator('.svg-indicator-indication1', 145, results.total, results.wrong) 
-     let correctScore = document.querySelector('#correct p')
-         correctScore.textContent =  Number((100/results.total) * results.correct).toFixed(2)  + "%"
-     let correctCount = document.querySelectorAll('#correct p:last-child span')
-         correctCount[0].textContent = results.correct
-         correctCount[1].textContent = results.total
-
-     let wrongScore = document.querySelector('#wrong p')
-         wrongScore.textContent = Number((100/results.total) * results.wrong).toFixed(2) + "%"
-     let wrongCount = document.querySelectorAll('#wrong p:last-child span') 
-         wrongCount[0].textContent = results.wrong
-         wrongCount[1].textContent = results.total
-         
-     
-//        correctEl.firstElementChild.textContent = (results.total/100) * results.correct + "%"
-//        wrongEl.firstElementChild.textContent = (results.total/100) * results.wrong + "%"
-     /*
-     <h4>Correct</h4>+
-     <p>66%</p>
-     <p><span>4</span>/<span>6</span> questions</p>
-*/
-  console.log(results);
-}
 function updateSvgIndicator (el, r, start, current){
-  let indicator = document.querySelector(el)
+  //let indicator = document.querySelector(el)
   let progress = (100/start)*current
   let arcOffset = ( 2*3.14*r ) * ((100 - progress)/100)
-      indicator.style.strokeDashoffset = arcOffset
+      el.style.strokeDashoffset = arcOffset
   console.log(arcOffset);
   //console.log(indicator.style.strokeDashoffset);
   /*
