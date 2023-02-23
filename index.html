@@ -42,7 +42,12 @@
             </div>
         </div>
     </div>
-    <div id="benchmark" class="hidden">
+    <!--
+        documentazione
+        https://www.w3schools.com/tags/tag_template.asp
+        https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template?retiredLocale=it
+    -->
+    <template id="benchmark">
         <div class="layoutimer">
             <div id="timer">
                 <svg class="svg-indicator" >
@@ -80,19 +85,23 @@
     
             <div class="footer">question &nbsp;<span id="current">1</span><span class="slash">/</span><span id="total" class="slash"> 10</span></div>
 
-    </div>
+    </template>
 
-    <div id="results" class="hidden">
+    <template id="results">
         <div class="content">
             <h2>Results</h2>
             <p class="pofh2">The summary of your answers:</p>
             <div class="percentuali">
                 <div id="correct">
                     <h4>Correct</h4>
-                    <p>66%</p>
-                    <p><span>2</span>/<span>6</span>  questions</p>
+                    <p></p>
+                    <p><span></span>/<span></span>  questions</p>
                 </div>
                 <div class="centro">
+                    <div class="testocentro hideMsg">
+                        <h5>Oh no! Unfortunately</h5>
+                        <h6 class="slash">You didn't pass the exam.</h6>
+                    </div>                    
                     <div class="testocentro">
                         <h5>Congratulations!</h5>
                         <h6>You passed the exam.</h6>
@@ -103,24 +112,24 @@
                             promotions / spam folder)
                         </p>
                     </div>
-                    <svg class="svg-indicator1" class="dimension" >
-                        <circle class="svg-indicator-track1" />
-                        <circle class="svg-indicator-indication1" />
+                    <svg id="scorePie">
+                        <circle class="svg-indicator-track" />
+                        <circle class="svg-indicator-indication" />
                     </svg>
                 </div>
                 <div id="wrong">
                     <h4>Wrong</h4>
-                    <p>33%</p>
-                    <p><span>2</span>/<span>6</span>  questions</p>
+                    <p></p>
+                    <p><span></span>/<span></span>  questions</p>
                 </div>
             </div>
             <div class="footer">
                 <button>RATE US</button>
             </div>
         </div>
-    </div>
+    </template>
 
-    <div id="feedback" class="hidden">
+    <template id="feedback">
         <div class="content">
             <h2>Tell us how it's going</h2>
             <p>
@@ -138,9 +147,9 @@
             <input type="text" placeholder="Write your comment here">
             </div>
             <div class="footer">
-                <button>MORE INFO</button>
+                <button disabled>MORE INFO</button>
             </div>
         </div>
-    </div>    
+    </template>    
 </body>
 </html>
