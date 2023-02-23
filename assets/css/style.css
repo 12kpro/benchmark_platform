@@ -420,7 +420,7 @@ svg {
     vertical-align: middle;
 }
 
-.svg-indicator1 {
+#scorePie {
     width: 350px;
     height: 350px;
     position: absolute;
@@ -428,7 +428,7 @@ svg {
     left: 0;
 }
   
-.svg-indicator-track1, .svg-indicator-indication1 {
+#scorePie .svg-indicator-track,#scorePie .svg-indicator-indication {
     cx: 175px;
     cy: 175px;
     r: 145px;
@@ -436,16 +436,16 @@ svg {
     stroke-width: 30px;
 }
   
-.svg-indicator-track1 {
+#scorePie .svg-indicator-track {
     stroke: #00FFFF;
 }
   
-.svg-indicator-indication1 {
+#scorePie .svg-indicator-indication {
     stroke: #D20094;
     width: 350px;
     height: 350px;
     stroke-dasharray: 910.6px;
-    stroke-dashoffset: 188.4px;
+    stroke-dashoffset: 910.6px;
 }
 
 .testocentro {
