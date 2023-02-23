@@ -139,9 +139,7 @@ let proceed = document.querySelector('#main button')
           })
 
     document.querySelector('#main input[type="checkbox"]').addEventListener('click', (e) =>{
-      if(e.target.checked){
-          proceed.disabled = false
-      }
+      e.target.checked ? proceed.disabled = false : proceed.disabled = true
     })
 
 function refreshPage(next, render, animation = false){
