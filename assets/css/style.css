@@ -644,6 +644,7 @@ input:focus-visible{
   }
   
   .rating > label {
+    color: transparent;
     cursor: pointer;
     caret-color: transparent;
     width: 70px;
