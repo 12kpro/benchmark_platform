@@ -85,7 +85,7 @@
     <div id="results" class="hidden">
         <div class="content">
             <h2>Results</h2>
-            <p class="pofh2">The summary of your answers:</p>
+            <p><!--classe tolta pofh2-->The summary of your answers:</p>
             <div class="percentuali">
                 <div id="correct">
                     <h4>Correct</h4>
@@ -94,6 +94,10 @@
                 </div>
                 <div class="centro">
                     <div class="testocentro">
+                        <h5>Oh no!</h5>
+                        <h6 class="slash">You didn't passed the exam.</h6>
+                    </div>
+                    <div class="testocentro hideMsg">
                         <h5>Congratulations!</h5>
                         <h6>You passed the exam.</h6>
                         <p>
@@ -103,9 +107,9 @@
                             promotions / spam folder)
                         </p>
                     </div>
-                    <svg class="svg-indicator1" class="dimension" >
-                        <circle class="svg-indicator-track1" />
-                        <circle class="svg-indicator-indication1" />
+                    <svg id="scorePie">
+                        <circle class="svg-indicator-track" />
+                        <circle class="svg-indicator-indication" />
                     </svg>
                 </div>
                 <div id="wrong">
@@ -138,7 +142,7 @@
             <input type="text" placeholder="Write your comment here">
             </div>
             <div class="footer">
-                <button>MORE INFO</button>
+                <button disabled>MORE INFO</button>
             </div>
         </div>
     </div>    
