@@ -131,13 +131,77 @@ let results = {
 }
 let questionsCount = 0
 let timer
-let total = document.querySelector('#benchmark #total')
-    total.textContent = questions.length
+let main = document.querySelector('#main')
 
 
-//slideQuestion()
-stat()
+let proceed = document.querySelector('#main button')
+    proceed.addEventListener('click', (e) =>{
+            //refreshPage('benchmark', renderBenchmark)
+            refreshPage('results', renderResults)
+            //refreshPage('feedback', renderFeedback)
+          })
+    document.querySelector('#main input[type="checkbox"]').addEventListener('click', (e) =>{
+      if(e.target.checked){
+          proceed.disabled = false
+      }
+    })
 
+function refreshPage(next, render, animation){
+    let template = document.querySelector('#' + next).cloneNode(true)
+        main.className = next
+        main.innerHTML = ''
+        for (const el of render(template)) {
+            main.append(el)  
+        }
+        if( animation ){
+            animation()
+        }
+}
+
+function renderFeedback(template){
+    let rating = template.querySelector('.rating')
+    for (let i = 0; i < 10; i++) {
+      let radio = createRadio(i, i + 1, {type: 'radio', name: 'rating'})
+          rating.append(radio.input, radio.label)
+    }
+    return template.children
+}
+function renderResults(template){
+  template.querySelector('button').addEventListener('click', (e) =>{
+           refreshPage('feedback', renderFeedback)
+  })  
+
+  return template.children
+}
+function renderBenchmark (template){
+  let second = Math.floor(Math.random()*2) ? 60 : 30
+  let benchmark = template.querySelector('form')
+  let current = template.querySelector('#current')
+  let countDown = template.querySelector("#countdown")
+      countDown.textContent = second
+  let total = template.querySelector('#total')
+      total.textContent = questions.length
+      console.log(template.children);
+      return template.children
+}
+function createRadio (i, v, p){
+
+  let input =  document.createElement('input')
+      input.setAttribute('type', p.type)
+      input.setAttribute('id', `${p.name}_${i}`)
+      input.setAttribute('name', p.name)
+      input.value = v      
+  let label =  document.createElement('label')
+      label.htmlFor = `${p.name}_${i}`
+      label.textContent = v
+
+  /*
+  for (const property in p) {
+    console.log(`${property}: ${p[property]}`);
+  }
+*/
+  return { input: input, label: label }
+}
 function createFom(questionId) {
     let question = questions[questionId]
     let fielSet = document.createElement('fieldset')
@@ -176,7 +240,17 @@ function createFom(questionId) {
         }
         return fielSet
 }
-function slideQuestion(){
+function slideQuestion(template){
+  let second = Math.floor(Math.random()*2) ? 60 : 30
+  let benchmark = template.querySelector('form')
+  let current = template.querySelector('#current')
+  let countDown = template.querySelector("#countdown")
+      countDown.textContent = second
+  let total = template.querySelector('#total')
+      total.textContent = questions.length
+      console.log(template.children);
+      return template.children
+/*
     let second = 60
     let benchmark = document.querySelector('#benchmark form')
     let current = document.querySelector('#benchmark #current')
@@ -207,7 +281,7 @@ function slideQuestion(){
         //rimuovere event dalle input
         // passare a slide successive
     }
-
+*/
 }
 function stat(){
   for (const question of questions) {
