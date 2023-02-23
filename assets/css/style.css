@@ -37,6 +37,61 @@ nav img {
 custom checkbox
 */
 
+h1 {
+    font-family: 'Outfit';
+    font-size: 60px;
+    margin-bottom: 40px;
+}
+
+h1 strong {
+    display: block;
+    font-family: 'Outfit';
+    font-size: 60px;
+    font-weight: bold;
+}
+
+h2 {
+    font-family: 'Outfit';
+    text-align: center;
+    font-size: 60px;
+    margin-bottom: 1%;
+}
+
+h3 {
+    font-family: 'Outfit';
+    color: #D20094;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+h5 {
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 3%;
+}
+
+h6 {
+    text-align: center;
+    color: #00FFFF;
+    font-weight: bold;
+    padding-bottom: 10%;
+}
+
+ul {
+    margin: 70px 0 50px 0;
+    padding-left: 30px;
+}
+
+ul li {
+    
+    line-height: 1.5;
+}
+
+ul li strong {
+    font-weight: bold;
+
+}
 
 .terms {
     display: flex;
@@ -145,45 +200,9 @@ section {
 }
 */
 .welcontent{
-    margin-right: auto;
-    margin-bottom: 20vh;
+    margin-bottom: 224px;
 }
 
-h1 {
-    font-family: 'Outfit';
-    font-size: 60px;
-    margin-bottom: 40px;
-}
-
-h1 strong {
-    display: block;
-    font-family: 'Outfit';
-    font-size: 60px;
-    font-weight: bold;
-}
-
-h3 {
-    font-family: 'Outfit';
-    color: #D20094;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-ul {
-    margin: 70px 0 50px 0;
-    padding-left: 30px;
-}
-
-ul li {
-    
-    line-height: 1.5;
-}
-
-ul li strong {
-    font-weight: bold;
-
-}
 
 .welcome .footer {
     width: 100%;
@@ -193,8 +212,12 @@ ul li strong {
     font-weight: 400;
 }
 
-.welcome .footer > span{
-
+.welcome .footer  span{
+    font-family: 'Inter';
+    font-size: 16px;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    
 }
 
 .terms{
@@ -204,6 +227,7 @@ ul li strong {
 .welcome .footer label {
     cursor: pointer;
     padding-left: 15px;
+    
 }
 .welcome .footer button{
     font-family: 'Outfit';
@@ -362,7 +386,6 @@ form fieldset label:hover{
 .footer {
     font-family: 'Outfit';
     font-size: 1.3rem;
-    display: flex;
     margin: 1% auto;
     display: flex;
     flex-direction: row;
@@ -372,6 +395,7 @@ form fieldset label:hover{
     
 }
 /* cambiare la classe di riferimento di questo footer */
+
 .slash{
     color: #D20094;
 }
@@ -384,14 +408,8 @@ form fieldset label:hover{
     text-align: center;
 }
 */
-h2 {
-    font-family: 'Outfit';
-    text-align: center;
-    font-size: 60px;
-    margin-bottom: 1%;
-}
 
-.pofh2 {
+.results .content > p{
     text-align: center;
     font-size: 1.5rem;
     font-family: 'Outfit';
@@ -420,15 +438,15 @@ svg {
     vertical-align: middle;
 }
 
-.svg-indicator1 {
+#scorePie {
     width: 350px;
     height: 350px;
     position: absolute;
     top: 0;
     left: 0;
-}
-  
-.svg-indicator-track1, .svg-indicator-indication1 {
+}  
+
+#scorePie .svg-indicator-track,#scorePie .svg-indicator-indication {
     cx: 175px;
     cy: 175px;
     r: 145px;
@@ -436,97 +454,96 @@ svg {
     stroke-width: 30px;
 }
   
-.svg-indicator-track1 {
+#scorePie .svg-indicator-track {
     stroke: #00FFFF;
+    filter: drop-shadow(5px 5px 5px rgb(0 0 0 / 0.5));
 }
   
-.svg-indicator-indication1 {
+#scorePie .svg-indicator-indication {
     stroke: #D20094;
     width: 350px;
     height: 350px;
     stroke-dasharray: 910.6px;
-    stroke-dashoffset: 188.4px;
+    stroke-dashoffset: 910.6px;
 }
 
 .testocentro {
+
+    margin-top: 40%;
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: center;
+    /*font-size: 0.9rem;*/
+}
+
+
+
+.hideMsg{
+    display: none;
     margin-top: 30%;
     margin-left: 20%;
     margin-right: 20%;
     text-align: center;
+
+}
+
+.centro  p {
     font-size: 0.9rem;
-}
-
-h5 {
     text-align: center;
-    font-weight: bold;
-    padding-bottom: 3%;
-}
-
-h6 {
-    text-align: center;
-    color: #00FFFF;
-    font-weight: bold;
-    padding-bottom: 10%;
-}
-
-.centro > p {
-    text-align: center;
-    
 }
 
 #wrong  {
     width: 350px;
     height: 350px;
     text-align: end;
+    padding: 10% 2% 0 0;
+    box-sizing: border-box;
 }
 
 #correct {
     width: 350px;
     height: 350px;
     text-align: start;
+    padding: 10% 0 0 2%;
+    box-sizing: border-box;
 }
+
 
 
 #wrong > h4, #correct > h4{
     font-family: 'Outfit';
     font-size: 60px;
-    padding-bottom: 2%;
-    padding-top: 30%;
-    padding-left: 10%;
+    margin-bottom: 2%;
+
 }
 
-#wrong > h4{
-    padding-right: 10%;
-}
 
 #wrong p:nth-child(2){
     font-family: 'Outfit';
     font-size: 60px;
     font-weight: bold;
-    padding-bottom: 2%;
-    padding-right: 10%;
+    margin-bottom: 2%;
+    
 }
 
 #correct p:nth-child(2){
     font-family: 'Outfit';
     font-size: 60px;
     font-weight: bold;
-    padding-bottom: 2%;
-    padding-left: 10%;
+    margin-bottom: 2%;
+    
 }
 
 #correct p:nth-child(3){
-    padding-left: 10%;
     font-size: 1.3rem;
 }
 
 #wrong p:nth-child(3){
-    padding-right: 10%;
     font-size: 1.3rem;
 }
 
-.results button {
-    
+.results .footer button {
+
     margin-top: 5%;
     text-align: center;
     text-transform: uppercase;
@@ -540,7 +557,7 @@ h6 {
     box-shadow: 0 0 5px #00FFFF, 0 0 15px #00FFFF;
 }
 
-.results button:hover{
+.results .footer button:hover{
     transition: 1s;
     background: #00FFFF;
     box-shadow: 0 0 5px #00FFFF,
@@ -600,13 +617,12 @@ input:focus-visible{
     outline: none;
 }
 
-.feedback button {
+.feedback .footer button {
     font-family: 'Outfit';
     font-size: 1.5rem;
     text-transform: uppercase;
     padding: 20px 55px;
-    background: transparent;
-    
+    background-color: #00FFFF;
     border: 3px solid transparent;
     color: rgb(32, 2, 38);
     font-weight: bold;
@@ -614,11 +630,8 @@ input:focus-visible{
     box-shadow: 0 0 5px #00FFFF, 0 0 20px #00FFFF;
 }
 
-.feedback button:hover {
-    transition: 1s;
-    background: #00FFFF;
-    box-shadow: 0 0 5px #00FFFF,
-    0 0 25px #00FFFF, 0 0 50px #00FFFF;
+.feedback .footer button:disabled {
+    background: transparent;
 }
 
 
