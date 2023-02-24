@@ -18,8 +18,9 @@ let rateBtn = true
 //Object.keys( questions).length > 0 ?  refreshPage('results', renderResults,resultsAnimation) :  welcome()
 
 if (Object.keys( questions).length > 0) {
-    refreshPage ('results', renderResults,resultsAnimation)
     rateBtn = false
+    refreshPage ('results', renderResults,resultsAnimation)
+
 }else{
   welcome()
 }
@@ -34,7 +35,7 @@ function welcome() {
     document.querySelector('#main input[type="checkbox"]').addEventListener('click', (e) =>{
       e.target.checked ? proceed.disabled = false : proceed.disabled = true
     })
-    
+}   
 //questa funzione prende determinati parametri che successivamente serviranno per
 //riassegnare un valore al main, svuotarlo e riaggiornare il template per avere una nuova pagina
 
@@ -105,7 +106,7 @@ function renderResults(template){
       let msg = template.querySelectorAll('.testocentro')
       let btn = template.querySelector('button')
 
-      if(btn == false){
+      if( !rateBtn ){
         btn.style.display = 'none'
       }
 
