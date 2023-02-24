@@ -25,7 +25,7 @@ if (Object.keys( questions).length > 0) {
   welcome()
 }
 
-
+/*Questa funzione mi crea il bottone nella pagina di benvenuto   */ 
 function welcome() {
   let proceed = document.querySelector('button')
       proceed.addEventListener('click', (e) =>{
@@ -50,6 +50,9 @@ function refreshPage(next, render, animation = false){
         }
         
 }
+/* Questa funzione si va a prendere i valori di input in base alla difficoltà selezionata dall'utente e dal numero di domande scelte, in base alla scelta fatta
+ partirà una chiamata Fetch che verrà gestita con un then e ritornerà un template */
+
 function renderdifficulty(template) {
   let amount = template.querySelector('input[name="amout"]')
   let difficulty = template.querySelector('select[name="difficulty"]')
@@ -78,10 +81,12 @@ function renderdifficulty(template) {
   })
   return template
 }
+/* Questa è la funzione che và a prendere l'input sulle stelline che equivale al feedback dell'utente  */
+
 function renderFeedback(template){
     let typingTimer
     let rating = template.querySelector('.rating')                        
-    let input = template.querySelector('input')                           
+    let input = template.querySelector('input')                     
     let btn = template.querySelector('button')
 
     for (let i = 0; i < 10; i++) {
@@ -100,6 +105,9 @@ function renderFeedback(template){
     })
     return template
 }
+
+/* Questa funzione corrisponde all'ultima pagina dove si potrà visualizzare la percentuale in numeri e in formato riempimento del cerchio 
+ centrale delle domande giuste e di quelle sbagliate */
 function renderResults(template){
       let results = buildResults()
       let stats = Object.keys(results)
@@ -133,6 +141,8 @@ function renderResults(template){
 
   return template
 }
+
+/*Questa funzione mi avvia un timer con un tempo randon tra 30 e 60 sec. in più mi clona l'Array delle domande incorrette e ci pusha quelle corrette   */
 function renderBenchmark (template){
   
   
@@ -188,7 +198,7 @@ function renderBenchmark (template){
  
       return template
 }
-
+/*Questa è la funzione che mi andrà a calcolare la percentuale di giuste e sbagliate per colorare di conseguenza il cerchio */
 function resultsAnimation() {
   let ctx = document.getElementById('scorePie');
   let results = buildResults()
@@ -217,7 +227,7 @@ function resultsAnimation() {
 
 
 }
-
+/*Questa funzione mi creerà un timer per dare un tempo limite di rispota alle domande ripartirà da zero ad ogni nuova domanda e si disattiverà una volta finite*/
 function countDownAnimation () {
 
     let timerEl = document.querySelector('#timer .svg-indicator-indication')
@@ -242,6 +252,7 @@ function countDownAnimation () {
       refreshPage('results', renderResults)
   }
 }
+//Questa è la funzione che crea il bottone e che viene richiamata all'occorrenza
 
 function createRadio (i, v, p){
 
@@ -256,7 +267,7 @@ function createRadio (i, v, p){
 
   return { input: input, label: label }
 }
-
+/*Questa è la funzione madre che mi calcola il raggio del cerchio e che quindi controllerà la sua colorazione e che verrà richiamata all'occorenza*/ 
 function updateSvgIndicator (el, r, start, current){
   let progress = (100/start)*current
   let arcOffset = ( 2*3.14*r ) * ((100 - progress)/100)
