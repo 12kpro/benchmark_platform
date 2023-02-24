@@ -1,96 +1,96 @@
+// Attendo caricamento del DOM
 document.addEventListener('DOMContentLoaded', (event) => {
 
-
-//https://opentdb.com/api.php?amount=10&category=18&difficulty=easy
-const get = async (url, params) => {
-    const response = await fetch(url + '?' + new URLSearchParams(params))
-    const data = await response.json()
-
-    return data
-}
-
-let questions = localStorage.results ? JSON.parse(localStorage.results) : {}
-let questionsCount = 0
+//definizione  delle variabili iniziale
+let questions = localStorage.results ? JSON.parse(localStorage.results) : {} // Se ci sono dati in localstorage  uso quelli oppure oggetto vuoto
+let questionsCount = 0                                                        // contatore progressivo per le domande del quiz
 let timer
-let main = document.querySelector('#main')
+let main = document.querySelector('#main') //Recupero elemento principale, saranno inserite qui le varie pagine
 let rateBtn = true
 
-//Object.keys( questions).length > 0 ?  refreshPage('results', renderResults,resultsAnimation) :  welcome()
-
+//se sono presenti dati in local storage ripresenta la pagina results altrimenti si avvia il quiz da welcome
 if (Object.keys( questions).length > 0) {
-    rateBtn = false
+    rateBtn = false                                           //disabilita il pulsante rate us
     refreshPage ('results', renderResults,resultsAnimation)
-
 }else{
   welcome()
 }
+// Funzione async per il recupero delle domande dall'end point
+async function get (url, params) {
+  const response = await fetch(url + '?' + new URLSearchParams(params))
+  const data = await response.json()
 
-/*Questa funzione mi crea il bottone nella pagina di benvenuto   */ 
+  return data
+}
+// Questa funzione assegna gli eventi agli elementi checkbox e button della pagina iniziale
 function welcome() {
   let proceed = document.querySelector('button')
       proceed.addEventListener('click', (e) =>{
-          refreshPage('difficulty', renderdifficulty)
+          refreshPage('difficulty', renderdifficulty)  // Carica la pagina di impostazione del quiz
           })
 
     document.querySelector('#main input[type="checkbox"]').addEventListener('click', (e) =>{
-      e.target.checked ? proceed.disabled = false : proceed.disabled = true
+      e.target.checked ? proceed.disabled = false : proceed.disabled = true         //se checkbox è spuntata abilita il pulsante proceed
     })
 }   
 //questa funzione prende determinati parametri che successivamente serviranno per
 //riassegnare un valore al main, svuotarlo e riaggiornare il template per avere una nuova pagina
 
-function refreshPage(next, render, animation = false){
-    let template = document.querySelector('#' + next).content.cloneNode(true)    
-        main.className = next                                                   
-        main.innerHTML = ''                                                     
-        main.append(render(template))                                           
+function refreshPage(next, render, animation = false){                            //parametri render e animation sono callback
+    let template = document.querySelector('#' + next).content.cloneNode(true)     // recupera il template richiesto
+        main.className = next
+        main.innerHTML = ''
+        main.append(render(template))                                             //elabora il template sulla base dei dati
 
         if( animation ){
-            animation()
+            animation()                                                           // applica eventuali animazioni
         }
         
 }
-/* Questa funzione si va a prendere i valori di input in base alla difficoltà selezionata dall'utente e dal numero di domande scelte, in base alla scelta fatta
- partirà una chiamata Fetch che verrà gestita con un then e ritornerà un template */
-
+/*
+ Funzione necessaria ad applicare gli eventi alla form di impostazione del quiz  ha come parametro il template da applicare al main
+ */
 function renderdifficulty(template) {
   let amount = template.querySelector('input[name="amout"]')
   let difficulty = template.querySelector('select[name="difficulty"]')
   let btn = template.querySelector('button')
   let loader = template.querySelector('.loader')
 
-  amount.addEventListener('change',(e) =>{
-    e.target.checkValidity() ? btn.disabled = false : btn.disabled = true
+  amount.addEventListener('keyup',(e) =>{
+    typingTimer = setTimeout(()=>{
+      e.target.checkValidity() ? btn.disabled = false : btn.disabled = true
+    }, 1000);
   })
-  template.querySelector('button').addEventListener('click', (e) =>{
-    loader.classList.add('active')
+
+  btn.addEventListener('click', (e) =>{
+    loader.classList.add('active')                                            //attiva il loader in attesa della risposta
     e.target.disabled = true 
-    get('https://opentdb.com/api.php', {
+    get('https://opentdb.com/api.php', {                                      //recupero i valori di input del form e avvio la fetch al end point specificato
       amount: amount.value,
       category:18,
       difficulty: difficulty.value
-    }).then((data) => {
+    }).then((data) => {                                                       //se la fetch va a buon fine inserisco l'array delle domande nella variabile questions
       if ( data.results ){
         questions = data.results
-        loader.classList.remove('active')
-        refreshPage('benchmark', renderBenchmark, countDownAnimation)
+        loader.classList.remove('active')                                     //Rimuove il loader
+        refreshPage('benchmark', renderBenchmark, countDownAnimation)         //Fa iniziare il questionario
       }
-
-      console.log(data)
     })
   })
   return template
 }
-/* Questa è la funzione che và a prendere l'input sulle stelline che equivale al feedback dell'utente  */
 
+/**
+Applica gli eventi agli elementi del template feedback e genera gli input radio necessari per il rating
+ */
 function renderFeedback(template){
     let typingTimer
-    let rating = template.querySelector('.rating')                        
-    let input = template.querySelector('input')                     
+    let rating = template.querySelector('.rating')
+    let input = template.querySelector('input')
     let btn = template.querySelector('button')
 
     for (let i = 0; i < 10; i++) {
-      let radio = createRadio(i, i + 1, {type: 'radio', name: 'rating'})
+      let radio = createRadio(i, i + 1, {type: 'radio', name: 'rating'})  //richiama la funzione per generare gli input
           rating.append(radio.input, radio.label)
     }
     input.addEventListener('keyup', (e) =>{
@@ -101,20 +101,22 @@ function renderFeedback(template){
     })
 
     btn.addEventListener('click', (e) =>{
-        location.reload()
+        location.reload()                                                 //se premuto il bottone causa il reload della pagina
     })
     return template
 }
 
-/* Questa funzione corrisponde all'ultima pagina dove si potrà visualizzare la percentuale in numeri e in formato riempimento del cerchio 
- centrale delle domande giuste e di quelle sbagliate */
+/* Questa funzione corrisponde alla pagina dove si potrà visualizzare la percentuale in numeri e in formato riempimento del cerchio 
+ centrale delle domande giuste e di quelle sbagliate. Applica gli eventi agli elementi e compila il template results
+  */
+
 function renderResults(template){
-      let results = buildResults()
+      let results = buildResults()                           //recupero le statistiche del quiz
       let stats = Object.keys(results)
       let msg = template.querySelectorAll('.testocentro')
       let btn = template.querySelector('button')
 
-      if( !rateBtn ){
+      if( !rateBtn ){                                       // serve a disattivare il bottone Rate US nel caso siano presenti dati salvati in local storage
         btn.style.display = 'none'
       }
 
@@ -126,7 +128,7 @@ function renderResults(template){
           msg[1].classList.remove('hideMsg')
       }
 
-      for (const stat of stats) {
+      for (const stat of stats) {                          // Compilo gli elementi delle statistiche , WRONG e CORRECT
           let partial = stat == 'correct' ? results.correct : results.wrong
           let el = template.querySelector(`#${stat} p`)
               el.textContent =  Number((100/questions.length) * partial).toFixed(2)  + "%"
@@ -142,13 +144,15 @@ function renderResults(template){
   return template
 }
 
-/*Questa funzione mi avvia un timer con un tempo randon tra 30 e 60 sec. in più mi clona l'Array delle domande incorrette e ci pusha quelle corrette   */
+/**
+  Funzione che elabora il template benchmnark per ogni singola domanda imposta il timer e assegna gli eventi ai bottoni delle risposte
+ */
 function renderBenchmark (template){
   
   
   let second = Math.floor(Math.random()*2) ? 60 : 30
-  let question = questions[questionsCount]
-  let answers = Array.from(question.incorrect_answers)
+  let question = questions[questionsCount]                          // recupero la domanda in base al contatore
+  let answers = Array.from(question.incorrect_answers)              // Creo un array con tutte le possibili risposte 
       answers.push(question.correct_answer)  
   
   let countDown = template.querySelector("#countdown")
@@ -168,25 +172,26 @@ function renderBenchmark (template){
       legend.innerHTML = question.question
 
       fieldset.append(legend)
-      for (let [i, a] of answers.entries()) {
-        
-        let radio =  createRadio(i,a,{type: 'radio', name: 'answer'})
-            radio.input.addEventListener('click',(e) => {
-                    question.answer = e.target.value
-                    clearInterval(timer)
 
-                    Swal.fire({
+      for (let [i, a] of answers.entries()) {                           // eseguo un ciclo sulle risposte, creo gli input e assegno gli eventi
+        
+        let radio =  createRadio(i,a,{type: 'radio', name: 'answer'})   // Invoco la funzione che crea gli input radio
+            radio.input.addEventListener('click',(e) => {               // assegno l'evento click
+                    question.answer = e.target.value                    // Crea un nuovo parametro chiamato answer nell oggetto question e assagno il valore selezionato al clik
+                    clearInterval(timer)                                // resetto il timer
+
+                    Swal.fire({                                         // Faccio apparire il popUp esito risposta
                       icon: question.correct_answer == question.answer ? 'success' : 'error',
                       confirmButtonText: 'Proceed',
                       confirmButtonColor: '#00FFFF',
                     }).then((result) => {
                       if (result.isConfirmed) {
-                        if ( questionsCount < questions.length - 1 ){
-                          questionsCount = questionsCount + 1 
-                          refreshPage('benchmark', renderBenchmark, countDownAnimation)
+                        if ( questionsCount < questions.length - 1 ){                     // verifico se le domande sono finite
+                          questionsCount = questionsCount + 1                             // incremento il contatore
+                          refreshPage('benchmark', renderBenchmark, countDownAnimation)   // Passo alla domanda sucessiva
                         }else{
-                          localStorage.setItem('results', JSON.stringify(questions));
-                          refreshPage('results', renderResults,resultsAnimation)
+                          localStorage.setItem('results', JSON.stringify(questions));     // salvo l'oggetto questions in localstorage
+                          refreshPage('results', renderResults,resultsAnimation)          // rimando alla pagina results
                         }
                       }
                     })
@@ -196,11 +201,14 @@ function renderBenchmark (template){
  
       return template
 }
-/*Questa è la funzione che mi andrà a calcolare la percentuale di giuste e sbagliate per colorare di conseguenza il cerchio */
+
+/*
+Inserisce il grafico a torta nella pagina results utilizzando la libreria chart.js
+*/
 function resultsAnimation() {
   let ctx = document.getElementById('scorePie');
-  let results = buildResults()
-      results = Object.keys(results).reverse().reduce((a, c) => (a[c] = results[c], a), {})
+  let results = buildResults()                                                               // richiamo la funzione che elabora le risposte da l'oggetto questions
+      results = Object.keys(results).reverse().reduce((a, c) => (a[c] = results[c], a), {}) //  inverte le chiavi dell oggetto
   
   new Chart(ctx, {
     type: 'doughnut',
@@ -237,20 +245,18 @@ function countDownAnimation () {
       timer = setInterval(() => {
         second--
         countDown.textContent = second
-        updateSvgIndicator(timerEl, 40, start, second)
+        updateSvgIndicator(timerEl, 40, start, second)                      // aggiorna la grafica a video
         if ( second == 0 ){
           questionsCount = questionsCount + 1
           clearInterval(timer)
-          refreshPage('benchmark', renderBenchmark, countDownAnimation)
+          refreshPage('benchmark', renderBenchmark, countDownAnimation)     // allo scadere del timer rimanda alla domanda successiva
         }
-        console.log("Delayed for 1 second.");
       }, 1000)
   }else{
-      console.log('Domande finite');
       refreshPage('results', renderResults)
   }
 }
-//Questa è la funzione che crea il bottone e che viene richiamata all'occorrenza
+//Questa è la funzione che crea il bottone( input + label ) e che viene richiamata all'occorrenza
 
 function createRadio (i, v, p){
 
@@ -271,18 +277,17 @@ function updateSvgIndicator (el, r, start, current){
   let arcOffset = ( 2*3.14*r ) * ((100 - progress)/100)
       el.style.strokeDashoffset = arcOffset
 }
-
+/*
+scorre l'array delle risposte e crea un nuovo oggetto con le statistiche
+*/
 function buildResults() {
   let results = {
     correct: 0,
     wrong: 0
   }
   for (const question of questions) {
-      question.correct_answer == question.answer ? results.correct += 1  : results.wrong += 1
+      question.correct_answer == question.answer ? results.correct += 1  : results.wrong += 1 // |--> ternario leggendario
   }
   return results
 }
 })
-
-
-
