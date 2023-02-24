@@ -10,6 +10,8 @@
     <!-- COLLEGARE FONTAWESOME PER IL TICK DELLA CHECKBOX-->
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="assets/js/script.js"></script>
     <title>Benchmark platform</title>
 </head>
@@ -61,8 +63,12 @@
                   </fieldset>
             </form>
             <div class="footer">
-                <button >inizia</button>
+                <button disabled>inizia</button>
             </div>
+            <div class="loader">
+                <p>Caricamento quesiti in corso</p>
+                <div class="lds-ripple"><div></div><div></div></div>
+           </div>
         </div>
     </template>    
     <template id="benchmark">
@@ -102,25 +108,20 @@
                     <div class="testocentro hideMsg">
                         <h5>Oh no! Unfortunately</h5>
                         <h6 class="slash">You didn't pass the exam.</h6>
-                    </div>                    
-                    <div class="testocentro">
-                        <h5>Oh no!</h5>
-                        <h6 class="slash">You didn't passed the exam.</h6>
                     </div>
                     <div class="testocentro hideMsg">
                         <h5>Congratulations!</h5>
                         <h6>You passed the exam.</h6>
                         <p>
                             We'll send you the certificate
-                            in few minutes.<br>
+                            in few minutes.
+                        </p>
+                        <p>
                             Check your email (including
                             promotions / spam folder)
                         </p>
                     </div>
-                    <svg id="scorePie">
-                        <circle class="svg-indicator-track" />
-                        <circle class="svg-indicator-indication" />
-                    </svg>
+                    <canvas id="scorePie"></canvas>
                 </div>
                 <div id="wrong">
                     <h4>Wrong</h4>

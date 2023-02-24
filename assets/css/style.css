@@ -431,13 +431,16 @@ form fieldset label:hover{
     position: relative;
     width: 350px;
     height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
+/*
 svg {
     max-width: 100%;
     vertical-align: middle;
 }
-
+*/
 #scorePie {
     width: 350px;
     height: 350px;
@@ -445,7 +448,7 @@ svg {
     top: 0;
     left: 0;
 }  
-
+/*
 #scorePie .svg-indicator-track,#scorePie .svg-indicator-indication {
     cx: 175px;
     cy: 175px;
@@ -466,12 +469,9 @@ svg {
     stroke-dasharray: 910.6px;
     stroke-dashoffset: 910.6px;
 }
-
+*/
 .testocentro {
-
-    margin-top: 40%;
-    margin-left: 20%;
-    margin-right: 20%;
+    padding: 0 20%;
     text-align: center;
     /*font-size: 0.9rem;*/
 }
@@ -684,4 +684,66 @@ input:focus-visible{
     background-image: url('../images/star.svg');
     opacity: 0.8;
     /*background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23d8b11e' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");*/
+  }
+
+  .loader{
+    position: absolute;
+    background-color: rgb(0 0 0 / 0.5);
+    top: 110px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .loader.active{
+    display: flex;
+  }
+  .lds-ripple {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-ripple div {
+    position: absolute;
+    border: 4px solid #fff;
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  }
+  .lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+  }
+  @keyframes lds-ripple {
+    0% {
+      top: 36px;
+      left: 36px;
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+    4.9% {
+      top: 36px;
+      left: 36px;
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+    5% {
+      top: 36px;
+      left: 36px;
+      width: 0;
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      top: 0px;
+      left: 0px;
+      width: 72px;
+      height: 72px;
+      opacity: 0;
+    }
   }
