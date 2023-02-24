@@ -15,7 +15,15 @@ let timer
 let main = document.querySelector('#main')
 let rateBtn = true
 
-Object.keys( questions).length > 0 ?  refreshPage('results', renderResults,resultsAnimation) :  welcome()
+//Object.keys( questions).length > 0 ?  refreshPage('results', renderResults,resultsAnimation) :  welcome()
+
+if (Object.keys( questions).length > 0) {
+    refreshPage ('results', renderResults,resultsAnimation)
+    rateBtn = false
+}else{
+  welcome()
+}
+
 
 function welcome() {
   let proceed = document.querySelector('button')
@@ -52,6 +60,7 @@ function renderdifficulty(template) {
   })
   template.querySelector('button').addEventListener('click', (e) =>{
     loader.classList.add('active')
+    e.target.disabled = true 
     get('https://opentdb.com/api.php', {
       amount: amount.value,
       category:18,
@@ -70,8 +79,8 @@ function renderdifficulty(template) {
 }
 function renderFeedback(template){
     let typingTimer
-    let rating = template.querySelector('.rating')                        //
-    let input = template.querySelector('input')                           //
+    let rating = template.querySelector('.rating')                        
+    let input = template.querySelector('input')                           
     let btn = template.querySelector('button')
 
     for (let i = 0; i < 10; i++) {
@@ -94,6 +103,11 @@ function renderResults(template){
       let results = buildResults()
       let stats = Object.keys(results)
       let msg = template.querySelectorAll('.testocentro')
+      let btn = template.querySelector('button')
+
+      if(btn == false){
+        btn.style.display = 'none'
+      }
 
       if ((100/questions.length)*results.wrong > 40 ){
           msg[0].classList.remove('hideMsg')
