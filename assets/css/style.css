@@ -248,6 +248,11 @@ section {
 /* ----------------       FINE SECTION 1     ---------------------- */
 /* --------------SEZIONE SCEGLI LA DIFFICOLTA'--------------------- */
 
+.difficulty legend{
+
+
+}
+
 .difficulty select{
     font-family: 'Outfit';
     border: 1px solid #ad087cb3;
@@ -257,7 +262,7 @@ section {
     border-bottom-left-radius: 50px;
     appearance: none;
     padding: 0 30px 0 15px;
-    width: 40%;
+    width: 20%;
     box-shadow: 8px 2px 8px 2px #D20094, 4px 2px 8px 2px rgba(144,0,144,1);
     color: #ddd;
     background-color: transparent;
@@ -323,6 +328,7 @@ input[type="number"]::selection{
 
 .difficulty fieldset{
     height: 520px;
+    margin: 0 auto;
 }
 
 .loader > p{
