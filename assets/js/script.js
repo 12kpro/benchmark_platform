@@ -23,17 +23,15 @@ function welcome() {
           refreshPage('difficulty', renderdifficulty)
           })
 
-      document.querySelector('input[type="checkbox"]').addEventListener('click', (e) =>{
-        e.target.checked ? proceed.disabled = false : proceed.disabled = true
-      })
-}
-
+    document.querySelector('#main input[type="checkbox"]').addEventListener('click', (e) =>{
+      e.target.checked ? proceed.disabled = false : proceed.disabled = true
+    })
 
 function refreshPage(next, render, animation = false){
-    let template = document.querySelector('#' + next).content.cloneNode(true)
-        main.className = next
-        main.innerHTML = ''
-        main.append(render(template))
+    let template = document.querySelector('#' + next).content.cloneNode(true)   //questa funzione prende determinati parametri che successivamente serviranno per 
+        main.className = next                                                   //riassegnare un valore al main, svuotarlo e riaggiornare il template per avere una nuova pagina
+        main.innerHTML = ''                                                     
+        main.append(render(template))                                           
 
         if( animation ){
             animation()
@@ -69,8 +67,8 @@ function renderdifficulty(template) {
 }
 function renderFeedback(template){
     let typingTimer
-    let rating = template.querySelector('.rating')
-    let input = template.querySelector('input')
+    let rating = template.querySelector('.rating')                        //
+    let input = template.querySelector('input')                           //
     let btn = template.querySelector('button')
 
     for (let i = 0; i < 10; i++) {
