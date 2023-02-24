@@ -26,10 +26,13 @@ function welcome() {
     document.querySelector('#main input[type="checkbox"]').addEventListener('click', (e) =>{
       e.target.checked ? proceed.disabled = false : proceed.disabled = true
     })
+    
+//questa funzione prende determinati parametri che successivamente serviranno per
+//riassegnare un valore al main, svuotarlo e riaggiornare il template per avere una nuova pagina
 
 function refreshPage(next, render, animation = false){
-    let template = document.querySelector('#' + next).content.cloneNode(true)   //questa funzione prende determinati parametri che successivamente serviranno per 
-        main.className = next                                                   //riassegnare un valore al main, svuotarlo e riaggiornare il template per avere una nuova pagina
+    let template = document.querySelector('#' + next).content.cloneNode(true)    
+        main.className = next                                                   
         main.innerHTML = ''                                                     
         main.append(render(template))                                           
 
