@@ -238,7 +238,7 @@ section {
     font-style: bold;
     text-transform: uppercase;    
     color: rgb(32, 2, 38);
-    border: none;
+    border: 1px solid rgb(0, 0, 0);
     box-shadow: 0 0 5px #00FFFF, 0 0 20px #00FFFF;
 }
 .welcome .footer button:disabled {
@@ -247,12 +247,12 @@ section {
 
 /* ----------------       FINE SECTION 1     ---------------------- */
 /* --------------SEZIONE SCEGLI LA DIFFICOLTA'--------------------- */
-
+/* VA MODIFICATO EVENTUALMENTE
 .difficulty legend{
 
 
 }
-
+*/
 .difficulty select{
     font-family: 'Outfit';
     border: 1px solid #ad087cb3;
@@ -328,7 +328,8 @@ input[type="number"]::selection{
 
 .difficulty fieldset{
     height: 520px;
-    margin: 0 auto;
+    width: 1140px;
+    margin: 0;
 }
 
 .loader > p{
