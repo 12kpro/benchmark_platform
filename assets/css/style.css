@@ -33,9 +33,6 @@ nav img {
 .content{
     padding-top: 125px;
 }
-/******
-custom checkbox
-*/
 
 h1 {
     font-family: 'Outfit';
@@ -92,6 +89,7 @@ ul li strong {
     font-weight: bold;
 
 }
+/* check-box personalizzata */
 
 .terms {
     display: flex;
@@ -183,7 +181,7 @@ ul li strong {
 
 
 
-/*
+/*                                     PRECEDENTE CREAZIONE CSS CON HTML STATICO
 section {
     box-sizing: border-box;
     position: absolute;
@@ -199,6 +197,7 @@ section {
     margin: 0 auto;
 }
 */
+
 .welcontent{
     margin-bottom: 224px;
 }
@@ -247,12 +246,8 @@ section {
 
 /* ----------------       FINE SECTION 1     ---------------------- */
 /* --------------SEZIONE SCEGLI LA DIFFICOLTA'--------------------- */
-/* VA MODIFICATO EVENTUALMENTE
-.difficulty legend{
 
 
-}
-*/
 .difficulty select{
     font-family: 'Outfit';
     border: 1px solid #ad087cb3;
@@ -291,7 +286,7 @@ section {
     width: 325px;
     text-align: center;
 }
-/* DA CONTROLLARE ANIMAZIONE */
+/* DA CONTROLLARE ANIMAZIONE 
 .difficulty input[type="number"]::hover{
     width: 400px;
     transition: 0.5s;
@@ -302,7 +297,7 @@ input[type="number"]::selection{
 
     box-shadow: 0 30px #D20094, 0 0 50px rgba(144,0,144,1);
 }
-
+*/
 .difficulty .footer button{
     transition: 1s;
     font-family: 'Outfit';
@@ -421,29 +416,22 @@ input[type="number"]::selection{
 }
 
 /*---------------FINE SEZIONE DIFFICOLTA'--------------------------*/
-
+/*--------------- INIZIO BENCHMARK --------------------------------*/
 input[type="radio"]{
     display: none;
 } 
 #timer {
-    /*
-    position: relative;
-    margin: 0 auto;
-    display: fixed;
-    text-align: end;
-    */
     font-size: 1rem;
     width: 130px;
     height: 130px;
-    
 }
+
 .layoutimer{
     display: flex;
     flex-direction: row;
     justify-content: end;
     align-items: flex-end;
     padding-top: 30px;
-/*    width: 90%;*/
 }
 
 .testotimer{
@@ -459,14 +447,15 @@ svg {
     max-width: 100%;
     vertical-align: middle;
     transform: rotate(-90deg);
-  }
+}
+
 .svg-indicator {
     width: 130px;
     height: 130px;
     position: absolute;
     top: 30px;
-
 }
+
 .svg-indicator-track, .svg-indicator-indication {
     cx: 65px;
     cy: 65px;
@@ -494,8 +483,6 @@ svg {
     margin-bottom: 1%;
 }
 
-  
-
 
 fieldset {
     width: 100vh;/* SISTEMARE DIMENSIONE NON IN VH */
@@ -508,8 +495,9 @@ fieldset {
     align-content: center;
     gap: 30px;
     margin: 0 auto;
-/*    gap: calc(100% / 4 - 0.5rem) */
+
 }
+/*QUESTE IMPOSTAZIONI SONO SIA GENERICHE SIA PER BENCHMARK*/
 
 legend {
     font-family: 'Outfit';
@@ -517,38 +505,23 @@ legend {
     margin: 0 auto;
     width: 100%;
     text-align: center;
-/*    display: flex;
-    align-items: center;
-    justify-content: center;
-*/
     margin-bottom: 3%;
-    
-    
-    
 }
 
 form fieldset label {
     width: 350px;
- /*   height: 80px;*/
     margin: 0 auto;
     display: block;
     padding: 25px 0px;
-/*    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    align-content: center;
-    */
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 3px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     border-radius: 50px;
-    text-align: center;
-    
+    text-align: center;    
 }
+
 form fieldset label:hover{
     background: rgb(210,0,148);
     background: linear-gradient(90deg, rgba(210,0,148,1) 35%, rgba(144,0,144,1) 100%);
@@ -565,23 +538,17 @@ form fieldset label:hover{
     flex-direction: row;
     justify-content: center;
     text-transform: uppercase;
-    letter-spacing: 4px;
-    
+    letter-spacing: 4px; 
 }
-/* cambiare la classe di riferimento di questo footer */
 
 .slash{
     color: #D20094;
 }
 
+/*FINE IMPOSTAZIONI GENERICHE E BENCHMARK*/
+
 /* ------------------FINE SEZIONE 2---------------------------------*/
-/*
-#results {
-    display: none;
-    padding-top: 5%;
-    text-align: center;
-}
-*/
+
 
 .results .content > p{
     text-align: center;
@@ -596,11 +563,7 @@ form fieldset label:hover{
     justify-content: space-evenly;
     align-items: flex-start;
 }
-/*
-.percentuali > div{
-    display: inline-block;
-}
-*/
+
 .centro{
     position: relative;
     width: 350px;
@@ -609,12 +572,7 @@ form fieldset label:hover{
     align-items: center;
     justify-content: center;
 }
-/*
-svg {
-    max-width: 100%;
-    vertical-align: middle;
-}
-*/
+
 #scorePie {
     width: 350px;
     height: 350px;
@@ -622,35 +580,11 @@ svg {
     top: 0;
     left: 0;
 }  
-/*
-#scorePie .svg-indicator-track,#scorePie .svg-indicator-indication {
-    cx: 175px;
-    cy: 175px;
-    r: 145px;
-    fill: transparent;
-    stroke-width: 30px;
-}
-  
-#scorePie .svg-indicator-track {
-    stroke: #00FFFF;
-    filter: drop-shadow(5px 5px 5px rgb(0 0 0 / 0.5));
-}
-  
-#scorePie .svg-indicator-indication {
-    stroke: #D20094;
-    width: 350px;
-    height: 350px;
-    stroke-dasharray: 910.6px;
-    stroke-dashoffset: 910.6px;
-}
-*/
+
 .testocentro {
     padding: 0 20%;
     text-align: center;
-    /*font-size: 0.9rem;*/
 }
-
-
 
 .hideMsg{
     display: none;
@@ -740,14 +674,7 @@ svg {
 
 
 /* -------------------- FINE SEZIONE 3 -------------------------------- */
-/*
-#feedback{
-    display: none;
-    text-align: center;
-    padding-left: 7%;
-    padding-right: 7%;
-}
-*/
+
 
 .feedback .content{
     text-align: center;
@@ -781,8 +708,6 @@ input[type="text"]{
     color: #ddd;
     width: 100%;
 }
-
-
 
 .commento{
     border-bottom: 1px solid #D20094;
@@ -822,18 +747,18 @@ input:focus-visible{
     height: 70px;
     position: relative;
     margin-bottom: 80px;
-  }
+}
   
-  .rating-0 {
+.rating-0 {
     filter: grayscale(100%);
-  }
+}
   
-  .rating > input {
+.rating > input {
     display: none;
     caret-color: transparent;
-  }
+}
   
-  .rating > label {
+.rating > label {
     color: transparent;
     cursor: pointer;
     caret-color: transparent;
@@ -846,19 +771,16 @@ input:focus-visible{
     background-size: 76%;
     transition: .3s;
     opacity: 0.1;
-  }
-  
-  .rating > input:checked ~ label,
-  .rating > input:checked ~ label ~ label {
+}
+    
+.rating > input:checked ~ label,
+.rating > input:checked ~ label ~ label {
     background-image: url('../images/star.svg');
     opacity: 1;
-    /*background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23fcd93a' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");*/
-  }
+}
   
-  
-  .rating > input:not(:checked) ~ label:hover,
-  .rating > input:not(:checked) ~ label:hover ~ label {
+.rating > input:not(:checked) ~ label:hover,
+.rating > input:not(:checked) ~ label:hover ~ label {
     background-image: url('../images/star.svg');
     opacity: 0.8;
-    /*background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23d8b11e' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");*/
-  }
+}
