@@ -238,7 +238,7 @@ section {
     font-style: bold;
     text-transform: uppercase;    
     color: rgb(32, 2, 38);
-    border: 1px solid rgb(0, 0, 0);
+    border: none;
     box-shadow: 0 0 5px #00FFFF, 0 0 20px #00FFFF;
 }
 .welcome .footer button:disabled {

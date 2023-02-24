@@ -150,13 +150,7 @@ function renderBenchmark (template){
   let question = questions[questionsCount]
   let answers = Array.from(question.incorrect_answers)
       answers.push(question.correct_answer)  
-  let alert ={
-    title: 'Error!',
-    text: 'Do you want to continue',
-    icon: 'error',
-    confirmButtonText: 'Cool'
-  }
-
+  
   let countDown = template.querySelector("#countdown")
       countDown.setAttribute("data-seconds", second);
       countDown.textContent = second
@@ -180,18 +174,22 @@ function renderBenchmark (template){
             radio.input.addEventListener('click',(e) => {
                     question.answer = e.target.value
                     clearInterval(timer)
-                    if ( questionsCount < questions.length - 1 ){
-                      questionsCount = questionsCount + 1                      
-                      refreshPage('benchmark', renderBenchmark, countDownAnimation)
-                    }else{
-                      localStorage.setItem('results', JSON.stringify(questions));
-                      refreshPage('results', renderResults,resultsAnimation)
-                    }
-                    /*Swal.fire(alert).then((result) => {
-                      if (result.isConfirmed) {
 
+                    Swal.fire({
+                      icon: question.correct_answer == question.answer ? 'success' : 'error',
+                      confirmButtonText: 'Proceed',
+                      confirmButtonColor: '#00FFFF',
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        if ( questionsCount < questions.length - 1 ){
+                          questionsCount = questionsCount + 1 
+                          refreshPage('benchmark', renderBenchmark, countDownAnimation)
+                        }else{
+                          localStorage.setItem('results', JSON.stringify(questions));
+                          refreshPage('results', renderResults,resultsAnimation)
+                        }
                       }
-                    })*/
+                    })
                 })
                 fieldset.append(radio.input, radio.label)
       }
